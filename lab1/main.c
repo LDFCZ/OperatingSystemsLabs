@@ -2,11 +2,15 @@
 #include <pthread.h>
 #include <string.h>
 
+void printLines(char* str) {
+    for (int i = 0; i < 10; i++) {
+        printf("%s %d\n", str, i);
+    }
+}
+
 void* threadFunction(void *param){
 
-    for (int i = 10; i < 20; i++) {
-        printf("%d\n", i);
-    }
+    printLines("child");
 
     return NULL;
 }
@@ -19,9 +23,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Error %d: %s\n", err, strerror(err));
     }
 
-    for (int i = 0; i < 10; i++) {
-        printf("%d\n", i);
-    }
+    printLines("parent");
 
     pthread_exit(NULL);
 }
