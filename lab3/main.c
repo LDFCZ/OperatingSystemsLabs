@@ -13,7 +13,7 @@ void* printStringArray(void *param){
 
 void errorHandling(int err){
     if (err){
-        printf("Error %d: %s\n", err, strerror(err));
+        fprintf(stderr, "Error %d: %s\n", err, strerror(err));
     }
 }
 

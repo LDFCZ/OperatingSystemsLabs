@@ -3,11 +3,10 @@
 #include <string.h>
 
 void* threadFunction(void *param){
-    printf("6\n");
-    printf("7\n");
-    printf("8\n");
-    printf("9\n");
-    printf("10\n");
+
+    for (int i = 10; i < 20; i++) {
+        printf("%d\n", i);
+    }
 
     return NULL;
 }
@@ -17,14 +16,12 @@ int main(int argc, char **argv) {
     
     int err = pthread_create(&thread, NULL, threadFunction, NULL);
     if (err){
-        printf("Error %d: %s\n", err, strerror(err));
+        fprintf(stderr, "Error %d: %s\n", err, strerror(err));
     }
 
-    printf("1\n");
-    printf("2\n");
-    printf("3\n");
-    printf("4\n");
-    printf("5\n");
+    for (int i = 0; i < 10; i++) {
+        printf("%d\n", i);
+    }
 
     pthread_exit(NULL);
 }
