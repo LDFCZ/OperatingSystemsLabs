@@ -53,8 +53,6 @@ int readStrings(char **strings) {
     return idx;
 }
 
-
-
 void doCleanUp(char **strings, int strCount, pthread_t *threads) {
     freeStrings(strings, strCount);
     free(threads);
