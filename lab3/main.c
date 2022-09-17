@@ -1,7 +1,13 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <string.h>
+#include <errno.h>
 
+#define CORRECT_EXIT_CODE 0
+#define EXCEPTION_EXIT_CODE 1
+
+#define CORRECT_CODE 0
+#define EXCEPTION_CODE 1
 
 void* printStringArray(void *param){
     char **stringArray = (char**)param;
@@ -11,10 +17,15 @@ void* printStringArray(void *param){
     return NULL;
 }
 
-void errorHandling(int err){
-    if (err){
-        fprintf(stderr, "Error %d: %s\n", err, strerror(err));
+int errorHandling(int err){
+    switch (err) {
+        case EAGAIN:
+        case EINVAL:
+        case EPERM:
+            fprintf(stderr, "Thread creating error %d: %s\n", err, strerror(err));
+            return EXCEPTION_CODE;
     }
+    return CORRECT_CODE;
 }
 
 int main(int argc, char **argv) {
@@ -29,13 +40,19 @@ int main(int argc, char **argv) {
     char *stringArray4[] = {"11", "12", "13", NULL};
 
     int err = pthread_create(&thread1, NULL, printStringArray, stringArray1);
-    errorHandling(err);
+    if (errorHandling(err)) return EXCEPTION_EXIT_CODE;
     err = pthread_create(&thread2, NULL, printStringArray, stringArray2);
-    errorHandling(err);
+    if (errorHandling(err)) return EXCEPTION_EXIT_CODE;
     err = pthread_create(&thread3, NULL, printStringArray, stringArray3);
-    errorHandling(err);
+    if (errorHandling(err)) return EXCEPTION_EXIT_CODE;
     err = pthread_create(&thread4, NULL, printStringArray, stringArray4);
-    errorHandling(err);
+    if (errorHandling(err)) return EXCEPTION_EXIT_CODE;
     
     pthread_exit(NULL);
 }
+
+#undef CORRECT_EXIT_CODE
+#undef EXCEPTION_EXIT_CODE
+
+#undef CORRECT_CODE
+#undef EXCEPTION_CODE
