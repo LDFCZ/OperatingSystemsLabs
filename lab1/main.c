@@ -18,7 +18,7 @@ void printLines(char* str) {
     }
 }
 
-void* threadFunction(void *param){
+void* threadFunction(void *param) {
 
     printLines(CHILD);
 

@@ -10,8 +10,14 @@
 #define START_SYMBOL 'A'
 #define LAST_SYMBOL 'z'
 #define SLEEP_TIME 2
+#define EXECUTE 1  // 0 - при извлечении не исполнять обработчик
 
-void* thread_print(void *param) {
+void cleanup_handler(void *param) {
+    printf("\nThread canceled. Message from thread\n");
+}
+
+void *thread_print(void *param) {
+    pthread_cleanup_push(cleanup_handler, NULL);
     char symbol = START_SYMBOL;
     while (1) {
         pthread_testcancel();
@@ -20,7 +26,7 @@ void* thread_print(void *param) {
             symbol = START_SYMBOL;
         }
     }
-
+    pthread_cleanup_pop(EXECUTE); 
     return NULL;
 }
 
@@ -53,7 +59,7 @@ int main() {
             fprintf(stderr, "Thread joining error %d: %s\n", join_err, strerror(join_err));
             return EXCEPTION_EXIT_CODE;
     }
-    
+
     return CORRECT_EXIT_CODE;
 }
 
@@ -63,3 +69,4 @@ int main() {
 #undef START_SYMBOL
 #undef LAST_SYMBOL
 #undef SLEEP_TIME
+#undef EXECUTE

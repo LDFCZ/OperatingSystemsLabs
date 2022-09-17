@@ -9,15 +9,15 @@
 #define CORRECT_CODE 0
 #define EXCEPTION_CODE 1
 
-void* printStringArray(void *param){
+void* printStringArray(void *param) {
     char **stringArray = (char**)param;
-    for (char **currentString = stringArray; *currentString != NULL; ++currentString){
+    for (char **currentString = stringArray; *currentString != NULL; ++currentString) {
         printf("%s\n", *currentString);
     }
     return NULL;
 }
 
-int errorHandling(int err){
+int errorHandling(int err) {
     switch (err) {
         case EAGAIN:
         case EINVAL:
@@ -41,10 +41,13 @@ int main(int argc, char **argv) {
 
     int err = pthread_create(&thread1, NULL, printStringArray, stringArray1);
     if (errorHandling(err)) return EXCEPTION_EXIT_CODE;
+
     err = pthread_create(&thread2, NULL, printStringArray, stringArray2);
     if (errorHandling(err)) return EXCEPTION_EXIT_CODE;
+
     err = pthread_create(&thread3, NULL, printStringArray, stringArray3);
     if (errorHandling(err)) return EXCEPTION_EXIT_CODE;
+
     err = pthread_create(&thread4, NULL, printStringArray, stringArray4);
     if (errorHandling(err)) return EXCEPTION_EXIT_CODE;
     
