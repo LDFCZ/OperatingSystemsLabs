@@ -9,6 +9,7 @@
 
 #define START_SYMBOL 'A'
 #define LAST_SYMBOL 'z'
+#define SLEEP_TIME 2
 
 void* thread_print(void *param){
     char symbol = START_SYMBOL;
@@ -35,7 +36,7 @@ int main() {
             return EXCEPTION_EXIT_CODE;
     }
 
-    sleep(2);
+    sleep(SLEEP_TIME);
 
     int cancel_err = pthread_cancel(thread);
     if (cancel_err == ESRCH){
@@ -61,3 +62,4 @@ int main() {
 
 #undef START_SYMBOL
 #undef LAST_SYMBOL
+#undef SLEEP_TIME
