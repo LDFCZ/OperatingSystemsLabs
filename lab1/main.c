@@ -3,6 +3,7 @@
 #include <string.h>
 #include <errno.h>
 
+#define CORRECT_CODE 0
 #define CORRECT_EXIT_CODE 0
 #define EXCEPTION_EXIT_CODE 1
 
@@ -29,13 +30,9 @@ int main(int argc, char **argv) {
     pthread_t thread;
     
     int err = pthread_create(&thread, NULL, threadFunction, NULL);
-
-    switch (err) {
-        case EAGAIN:
-        case EINVAL:
-        case EPERM:
-            fprintf(stderr, "Thread creating error %d: %s\n", err, strerror(err));
-            return EXCEPTION_EXIT_CODE;
+    if (err != CORRECT_CODE) {
+        fprintf(stderr, "Thread creating error %d: %s\n", err, strerror(err));
+        return EXCEPTION_EXIT_CODE;
     }
 
     printLines(PARENT);
@@ -43,6 +40,7 @@ int main(int argc, char **argv) {
     pthread_exit(NULL);
 }
 
+#undef CORRECT_CODE
 #undef CORRECT_EXIT_CODE
 #undef EXCEPTION_EXIT_CODE
 

@@ -6,6 +6,7 @@
 #include <string.h>
 #include <errno.h>
 
+#define CORRECT_CODE 0
 #define CORRECT_EXIT_CODE 0
 #define EXCEPTION_EXIT_CODE 1
 
@@ -60,7 +61,7 @@ void doCleanUp(char **strings, int strCount, pthread_t *threads) {
 
 int main() {
 
-    char** strings = (char**)malloc(sizeof(char *) * MAX_NUM_STR);
+    char** strings = (char**)malloc(sizeof(char*) * MAX_NUM_STR);
     if (strings == NULL) {
         fprintf(stderr, "Malloc error\n");
         return EXCEPTION_EXIT_CODE;
@@ -82,25 +83,19 @@ int main() {
 
     for (int i = 0; i < strCount; i++) {
         int create_err = pthread_create(&threads[i], NULL, printString, strings[i]); 
-        switch (create_err) {
-            case EAGAIN:
-            case EINVAL:
-            case EPERM:
-                fprintf(stderr, "Thread creating error %d: %s\n", create_err, strerror(create_err));
-                doCleanUp(strings, strCount, threads);
-                return EXCEPTION_EXIT_CODE;
+        if (create_err != CORRECT_CODE) {
+            fprintf(stderr, "Thread creating error %d: %s\n", create_err, strerror(create_err));
+            doCleanUp(strings, strCount, threads);
+            return EXCEPTION_EXIT_CODE;
         }
     }
 
     for (int i = 0; i < strCount; i++) {
         int join_err = pthread_join(threads[i], NULL);
-        switch (join_err) {
-            case EDEADLK:
-            case EINVAL:
-            case ESRCH:
-                fprintf(stderr, "Thread joining error %d: %s\n", join_err, strerror(join_err));
-                doCleanUp(strings, strCount, threads);
-                return EXCEPTION_EXIT_CODE;
+        if (join_err != CORRECT_CODE) {
+            fprintf(stderr, "Thread joining error %d: %s\n", join_err, strerror(join_err));
+            doCleanUp(strings, strCount, threads);
+            return EXCEPTION_EXIT_CODE;
         }
     }
 
@@ -108,6 +103,7 @@ int main() {
     return CORRECT_EXIT_CODE;
 }
 
+#undef CORRECT_CODE
 #undef CORRECT_EXIT_CODE
 #undef EXCEPTION_EXIT_CODE
 

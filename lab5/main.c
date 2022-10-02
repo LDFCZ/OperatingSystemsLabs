@@ -4,6 +4,7 @@
 #include <string.h>
 #include <errno.h>
 
+#define CORRECT_CODE 0
 #define CORRECT_EXIT_CODE 0
 #define EXCEPTION_EXIT_CODE 1
 
@@ -34,35 +35,29 @@ int main() {
     pthread_t thread;
 
     int create_err = pthread_create(&thread, NULL, thread_print, NULL);
-    switch (create_err) {
-        case EAGAIN:
-        case EINVAL:
-        case EPERM:
-            fprintf(stderr, "Thread creating error %d: %s\n", create_err, strerror(create_err));
-            return EXCEPTION_EXIT_CODE;
+   if (create_err != CORRECT_CODE) {
+        fprintf(stderr, "Thread creating error %d: %s\n", create_err, strerror(create_err));
+        return EXCEPTION_EXIT_CODE;
     }
 
     sleep(SLEEP_TIME);
 
     int cancel_err = pthread_cancel(thread);
-    if (cancel_err == ESRCH){
+    if (cancel_err != CORRECT_CODE) {
         fprintf(stderr, "Thread canceling error %d: %s\n", cancel_err, strerror(cancel_err));
         return EXCEPTION_EXIT_CODE;
     }
-    printf("\nThread canceled\n");
 
     int join_err = pthread_join(thread, NULL);
-    switch (join_err) {
-        case EDEADLK:
-        case EINVAL:
-        case ESRCH:
-            fprintf(stderr, "Thread joining error %d: %s\n", join_err, strerror(join_err));
-            return EXCEPTION_EXIT_CODE;
+    if (join_err != CORRECT_CODE) {
+        fprintf(stderr, "Thread joining error %d: %s\n", join_err, strerror(join_err));
+        return EXCEPTION_EXIT_CODE;
     }
 
     return CORRECT_EXIT_CODE;
 }
 
+#undef CORRECT_CODE
 #undef CORRECT_EXIT_CODE
 #undef EXCEPTION_EXIT_CODE
 

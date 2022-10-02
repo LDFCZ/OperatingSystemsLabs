@@ -18,12 +18,9 @@ void* printStringArray(void *param) {
 }
 
 int errorHandling(int err) {
-    switch (err) {
-        case EAGAIN:
-        case EINVAL:
-        case EPERM:
-            fprintf(stderr, "Thread creating error %d: %s\n", err, strerror(err));
-            return EXCEPTION_CODE;
+    if (err != CORRECT_CODE) {
+        fprintf(stderr, "Thread creating error %d: %s\n", err, strerror(err));
+        return EXCEPTION_EXIT_CODE;
     }
     return CORRECT_CODE;
 }
@@ -40,16 +37,16 @@ int main(int argc, char **argv) {
     char *stringArray4[] = {"11", "12", "13", NULL};
 
     int err = pthread_create(&thread1, NULL, printStringArray, stringArray1);
-    if (errorHandling(err)) return EXCEPTION_EXIT_CODE;
+    if (errorHandling(err) != CORRECT_CODE) return EXCEPTION_EXIT_CODE;
 
     err = pthread_create(&thread2, NULL, printStringArray, stringArray2);
-    if (errorHandling(err)) return EXCEPTION_EXIT_CODE;
+    if (errorHandling(err) != CORRECT_CODE) return EXCEPTION_EXIT_CODE;
 
     err = pthread_create(&thread3, NULL, printStringArray, stringArray3);
-    if (errorHandling(err)) return EXCEPTION_EXIT_CODE;
+    if (errorHandling(err) != CORRECT_CODE) return EXCEPTION_EXIT_CODE;
 
     err = pthread_create(&thread4, NULL, printStringArray, stringArray4);
-    if (errorHandling(err)) return EXCEPTION_EXIT_CODE;
+    if (errorHandling(err) != CORRECT_CODE) return EXCEPTION_EXIT_CODE;
     
     pthread_exit(NULL);
 }
