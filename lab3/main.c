@@ -9,45 +9,41 @@
 #define CORRECT_CODE 0
 #define EXCEPTION_CODE 1
 
-void* printStringArray(void *param) {
-    char **stringArray = (char**)param;
-    for (char **currentString = stringArray; *currentString != NULL; ++currentString) {
-        printf("%s\n", *currentString);
+#define NUM_OF_THREADS 4
+
+void *print_message(void *arg) {
+    char **message = (char **)arg;
+    for (int str_num = 0; message[str_num] != NULL; ++str_num) {
+	printf("%s", message[str_num]);
     }
     return NULL;
 }
 
-int errorHandling(int err) {
-    if (err != CORRECT_CODE) {
-        fprintf(stderr, "Thread creating error %d: %s\n", err, strerror(err));
-        return EXCEPTION_EXIT_CODE;
-    }
-    return CORRECT_CODE;
-}
-
-int main(int argc, char **argv) {
-    pthread_t thread1;
-    pthread_t thread2;
-    pthread_t thread3;
-    pthread_t thread4;
-
-    char *stringArray1[] = {"1", "2", "3", NULL};
-    char *stringArray2[] = {"4", "5", "6", "7", "8", NULL};
-    char *stringArray3[] = {"9", "10", NULL};
-    char *stringArray4[] = {"11", "12", "13", NULL};
-
-    int err = pthread_create(&thread1, NULL, printStringArray, stringArray1);
-    if (errorHandling(err) != CORRECT_CODE) return EXCEPTION_EXIT_CODE;
-
-    err = pthread_create(&thread2, NULL, printStringArray, stringArray2);
-    if (errorHandling(err) != CORRECT_CODE) return EXCEPTION_EXIT_CODE;
-
-    err = pthread_create(&thread3, NULL, printStringArray, stringArray3);
-    if (errorHandling(err) != CORRECT_CODE) return EXCEPTION_EXIT_CODE;
-
-    err = pthread_create(&thread4, NULL, printStringArray, stringArray4);
-    if (errorHandling(err) != CORRECT_CODE) return EXCEPTION_EXIT_CODE;
+int main() {
     
+    pthread_t threads_id[NUM_OF_THREADS];
+    char *messages[][NUM_OF_THREADS] = {
+	    {"Thread 1, line 1\n", "Thread 1, line 2\n", "Thread 1, line 3\n", NULL},
+	    {"Thread 2, line 1\n", "Thread 2, line 2\n", "Thread 2, line 3\n", NULL},
+	    {"Thread 3, line 1\n", "Thread 3, line 2\n", "Thread 3, line 3\n", NULL},
+	    {"Thread 4, line 1\n", "Thread 4, line 2\n", "Thread 4, line 3\n", NULL}
+	};
+
+    for (int thread_num = 0; thread_num < NUM_OF_THREADS; ++thread_num) {
+	    int create_err = pthread_create(&threads_id[thread_num], NULL, print_message, &messages[thread_num]);
+    	if (create_err != CORRECT_CODE) {
+            fprintf(stderr, "Thread creating error %d: %s\n", create_err, strerror(create_err));
+            return EXCEPTION_EXIT_CODE;
+        }
+    }
+
+    for (int thread_num = 0; thread_num < NUM_OF_THREADS; ++thread_num) {
+	    int join_err = pthread_join(threads_id[thread_num], NULL);
+	    if (join_err != CORRECT_CODE) {
+            fprintf(stderr, "Thread joining error %d: %s\n", join_err, strerror(join_err));
+            return EXCEPTION_EXIT_CODE;
+        }
+    }
     pthread_exit(NULL);
 }
 
@@ -56,3 +52,5 @@ int main(int argc, char **argv) {
 
 #undef CORRECT_CODE
 #undef EXCEPTION_CODE
+
+#undef NUM_OF_THREADS
