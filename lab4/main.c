@@ -16,10 +16,12 @@ void* thread_print(void *param) {
     char symbol = START_SYMBOL;
     while (1) {
         pthread_testcancel();
+        pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, NULL);
         printf("%c", symbol);
         if (++symbol == LAST_SYMBOL){
             symbol = START_SYMBOL;
         }
+        pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
     }
 
     return NULL;
