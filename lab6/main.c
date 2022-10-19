@@ -85,8 +85,7 @@ int main() {
         int create_err = pthread_create(&threads[i], NULL, printString, strings[i]); 
         if (create_err != CORRECT_CODE) {
             fprintf(stderr, "Thread creating error %d: %s\n", create_err, strerror(create_err));
-            doCleanUp(strings, strCount, threads);
-            return EXCEPTION_EXIT_CODE;
+            break;
         }
     }
 
@@ -94,8 +93,6 @@ int main() {
         int join_err = pthread_join(threads[i], NULL);
         if (join_err != CORRECT_CODE) {
             fprintf(stderr, "Thread joining error %d: %s\n", join_err, strerror(join_err));
-            doCleanUp(strings, strCount, threads);
-            return EXCEPTION_EXIT_CODE;
         }
     }
 

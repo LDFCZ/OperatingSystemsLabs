@@ -22,10 +22,12 @@ void *thread_print(void *param) {
     char symbol = START_SYMBOL;
     while (1) {
         pthread_testcancel();
+        pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, NULL);
         printf("%c", symbol);
         if (++symbol == LAST_SYMBOL){
             symbol = START_SYMBOL;
         }
+        pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
     }
     pthread_cleanup_pop(EXECUTE); 
     return NULL;
@@ -45,13 +47,16 @@ int main() {
     int cancel_err = pthread_cancel(thread);
     if (cancel_err != CORRECT_CODE) {
         fprintf(stderr, "Thread canceling error %d: %s\n", cancel_err, strerror(cancel_err));
-        return EXCEPTION_EXIT_CODE;
     }
-
-    int join_err = pthread_join(thread, NULL);
+    
+    void* thread_output;
+    int join_err = pthread_join(thread, &thread_output);
     if (join_err != CORRECT_CODE) {
         fprintf(stderr, "Thread joining error %d: %s\n", join_err, strerror(join_err));
-        return EXCEPTION_EXIT_CODE;
+    }
+
+    if (thread_output == PTHREAD_CANCELED) {
+        printf("Thread canceled\n");
     }
 
     return CORRECT_EXIT_CODE;

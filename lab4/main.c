@@ -41,14 +41,12 @@ int main() {
     int cancel_err = pthread_cancel(thread);
     if (cancel_err != CORRECT_CODE) {
         fprintf(stderr, "Thread canceling error %d: %s\n", cancel_err, strerror(cancel_err));
-        return EXCEPTION_EXIT_CODE;
     }
     printf("\nThread canceled\n");
 
     int join_err = pthread_join(thread, NULL);
     if (join_err != CORRECT_CODE) {
         fprintf(stderr, "Thread joining error %d: %s\n", join_err, strerror(join_err));
-        return EXCEPTION_EXIT_CODE;
     }
     
     return CORRECT_EXIT_CODE;
