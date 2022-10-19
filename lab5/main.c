@@ -30,7 +30,7 @@ void *thread_print(void *param) {
         pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
     }
     pthread_cleanup_pop(EXECUTE); 
-    return NULL;
+    pthread_exit(NULL);
 }
 
 int main() {
