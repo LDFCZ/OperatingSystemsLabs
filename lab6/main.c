@@ -78,7 +78,7 @@ void doCleanUp(char **strings, int strCount, pthread_t *threads)
 
 int main()
 {
-    char **strings = (char **)malloc(sizeof(char *) * MAX_NUM_STR);
+    char *strings[MAX_NUM_STR]; // = (char **)malloc(sizeof(char *) * MAX_NUM_STR);
     if (strings == NULL)
     {
         fprintf(stderr, "Malloc error\n");
