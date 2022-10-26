@@ -32,7 +32,7 @@ void freeStrings(char **strings, int strCount)
     {
         free(strings[i]);
     }
-    free(strings);
+    //free(strings);
 }
 
 // Returns number of strings read or -1 if something goes wrong
