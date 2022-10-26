@@ -43,7 +43,7 @@ int readStrings(char **strings)
     size_t strlen = 200;
 
     printf("Enter strings to sort:\n");
-    while (readCount > 1)
+    while (readCount > 1 && idx < 100)
     {
         strings[idx] = (char *)malloc(sizeof(char) * strlen);
         if (strings[idx] == NULL)
@@ -54,8 +54,14 @@ int readStrings(char **strings)
         }
 
         readCount = getline(&strings[idx], &strlen, stdin);
-        idx++;
+        if (readCount == EXCEPTION_CODE) 
+        {
+            fprintf(stderr, "Getline error\n");
+            freeStrings(strings, idx)
+            return EXCEPTION_CODE;
+        }
 
+        idx++;
         if (readCount == 1)
         {
             free(strings[idx]);
@@ -73,7 +79,6 @@ void doCleanUp(char **strings, int strCount, pthread_t *threads)
 
 int main()
 {
-
     char **strings = (char **)malloc(sizeof(char *) * MAX_NUM_STR);
     if (strings == NULL)
     {
@@ -82,7 +87,7 @@ int main()
     }
 
     int strCount = readStrings(strings);
-    if (strCount == -1)
+    if (strCount == EXCEPTION_CODE)
     {
         return EXCEPTION_EXIT_CODE;
     }
