@@ -93,7 +93,7 @@ int is_valid_input(int num_of_args, char *num_of_threads_arg)
 {
     if (num_of_args != NUM_OF_ARGS)
     {
-        printf("Please write two arguments\nUsing: num_threads(more than 0 and less then 30 001)\n");
+        printf("Please write one argument\nUsing: num_threads(more than 0 and less then 30 001)\n");
         return EXCEPTION_CODE;
     }
 
