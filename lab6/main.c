@@ -57,6 +57,7 @@ int readStrings(char **strings)
         if (readCount == EXCEPTION_CODE) 
         {
             fprintf(stderr, "Getline error\n");
+            freeStrings(strings, idx);
             return EXCEPTION_CODE;
         }
 
@@ -88,7 +89,6 @@ int main()
     int strCount = readStrings(strings);
     if (strCount == EXCEPTION_CODE)
     {
-        freeStrings(strings, idx);
         return EXCEPTION_EXIT_CODE;
     }
 
