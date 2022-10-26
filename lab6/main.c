@@ -20,7 +20,7 @@ void *printString(void *args)
     int usleep_err = usleep(COEFFIECIENT * strlen((char *)args));
     if (usleep_err != CORRECT_CODE)
     {
-        fprintf(stderr, "usleep error\n");
+        fprintf(stderr, "usleep error %d: %s\n", usleep_err, strerror(usleep_err));
     }
     printf("%s", (char *)args);
     return NULL;
@@ -32,7 +32,7 @@ void freeStrings(char **strings, int strCount)
     {
         free(strings[i]);
     }
-    //free(strings);
+    free(strings);
 }
 
 // Returns number of strings read or -1 if something goes wrong
@@ -57,7 +57,7 @@ int readStrings(char **strings)
         if (readCount == EXCEPTION_CODE) 
         {
             fprintf(stderr, "Getline error\n");
-            freeStrings(strings, idx);
+            freeStrings(strings, idx)
             return EXCEPTION_CODE;
         }
 
@@ -79,7 +79,7 @@ void doCleanUp(char **strings, int strCount, pthread_t *threads)
 
 int main()
 {
-    char *strings[MAX_NUM_STR]; // = (char **)malloc(sizeof(char *) * MAX_NUM_STR);
+    char **strings = (char **)malloc(sizeof(char *) * MAX_NUM_STR);
     if (strings == NULL)
     {
         fprintf(stderr, "Malloc error\n");
