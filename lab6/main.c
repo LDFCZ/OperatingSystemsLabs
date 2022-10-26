@@ -20,7 +20,7 @@ void *printString(void *args)
     int usleep_err = usleep(COEFFIECIENT * strlen((char *)args));
     if (usleep_err != CORRECT_CODE)
     {
-        fprintf(stderr, "usleep error %d: %s\n", usleep_err, strerror(usleep_err));
+        fprintf(stderr, "usleep error\n");
     }
     printf("%s", (char *)args);
     return NULL;
@@ -57,7 +57,6 @@ int readStrings(char **strings)
         if (readCount == EXCEPTION_CODE) 
         {
             fprintf(stderr, "Getline error\n");
-            freeStrings(strings, idx)
             return EXCEPTION_CODE;
         }
 
@@ -89,6 +88,7 @@ int main()
     int strCount = readStrings(strings);
     if (strCount == EXCEPTION_CODE)
     {
+        freeStrings(strings, idx)
         return EXCEPTION_EXIT_CODE;
     }
 
