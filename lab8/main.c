@@ -36,7 +36,6 @@ void print_error(int return_code, char *additional_message)
 
 void *calc_partial_sum(void *arg)
 {
-
     partial_sum_args *args = (partial_sum_args *)arg;
     double partial_sum = 0;
 
@@ -69,7 +68,6 @@ int join_threads_with_partial_sum(int num_of_threads, pthread_t *threads_id, par
 
 int create_threads_for_partial_sum(int num_of_threads, pthread_t *threads_id, partial_sum_args *threads_args)
 {
-
     int iteration_num_for_thread = NUM_OF_STEPS / num_of_threads;
     int num_of_additional_iterations = NUM_OF_STEPS % num_of_threads;
 
@@ -93,7 +91,6 @@ int create_threads_for_partial_sum(int num_of_threads, pthread_t *threads_id, pa
 
 int is_valid_input(int num_of_args, char *num_of_threads_arg)
 {
-
     if (num_of_args != NUM_OF_ARGS)
     {
         printf("Please write two arguments\nUsing: num_threads(more than 0 and less then 30 001)\n");
@@ -118,7 +115,6 @@ int is_valid_input(int num_of_args, char *num_of_threads_arg)
 
 int calculate_pi(int num_of_threads, double *pi)
 {
-
     pthread_t threads_id[num_of_threads];          
     partial_sum_args threads_args[num_of_threads]; 
 
@@ -142,7 +138,6 @@ int calculate_pi(int num_of_threads, double *pi)
 
 int main(int argc, char **argv)
 {
-
     if (is_valid_input(argc, argv[NUM_OF_THREADS]) != CORRECT_CODE)
     {
         return EXIT_FAILURE;
