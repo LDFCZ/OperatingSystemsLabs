@@ -37,7 +37,7 @@ int main() {
     pthread_t thread;
 
     int create_err = pthread_create(&thread, NULL, thread_print, NULL);
-   if (create_err != CORRECT_CODE) {
+    if (create_err != CORRECT_CODE) {
         fprintf(stderr, "Thread creating error %d: %s\n", create_err, strerror(create_err));
         return EXCEPTION_EXIT_CODE;
     }
