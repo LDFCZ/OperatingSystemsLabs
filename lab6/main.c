@@ -22,10 +22,7 @@ void *printString(void *args)
     {
         fprintf(stderr, "usleep error %d: %s\n", usleep_err, strerror(usleep_err));
     }
-    else
-    {
-        printf("%s", (char *)args);
-    }
+    printf("%s", (char *)args);
     return NULL;
 }
 
