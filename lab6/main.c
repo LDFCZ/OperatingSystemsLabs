@@ -88,7 +88,7 @@ int main()
     int strCount = readStrings(strings);
     if (strCount == EXCEPTION_CODE)
     {
-        freeStrings(strings, idx)
+        freeStrings(strings, idx);
         return EXCEPTION_EXIT_CODE;
     }
 
