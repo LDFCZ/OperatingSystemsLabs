@@ -16,6 +16,20 @@ void print_error(int return_code, char *additional_message) {
     fprintf(stderr, "%s %d: %s\n", additional_message, return_code, strerror(return_code));
 }
 
+void lock_mutex(pthread_mutex_t *mutex) {
+    int lock_code = pthread_mutex_lock(mutex);
+    if (lock_code != CORRECT_CODE) {
+        print_error(lock_code, "Mutex lock error");
+    }
+}
+
+void unlock_mutex(pthread_mutex_t *mutex) {
+    int unlock_code = pthread_mutex_unlock(mutex);
+    if (unlock_code != CORRECT_CODE) {
+        print_error(unlock_code, "Mutex unlock error");
+    }
+}
+
 void *print_strings(void *param) {
     int lock_code, unlock_code;
     lock_code = pthread_mutex_lock(&startMutex);
@@ -78,20 +92,6 @@ void destroy_mutexes() {
     destroy_code = pthread_mutex_destroy(&mutex2);
     if (destroy_code != CORRECT_CODE) {
         print_error(destroy_code, "Mutex destroy error");
-    }
-}
-
-void lock_mutex(pthread_mutex_t *mutex) {
-    int lock_code = pthread_mutex_lock(mutex);
-    if (lock_code != CORRECT_CODE) {
-        print_error(lock_code, "Mutex lock error");
-    }
-}
-
-void unlock_mutex(pthread_mutex_t *mutex) {
-    int unlock_code = pthread_mutex_unlock(mutex);
-    if (unlock_code != CORRECT_CODE) {
-        print_error(unlock_code, "Mutex unlock error");
     }
 }
 
