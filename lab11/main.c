@@ -8,7 +8,7 @@
 #define CORRECT_EXIT_CODE 0
 #define EXCEPTION_EXIT_CODE 1
 
-#define SRT_COUNT 5
+#define SRT_COUNT 10
 
 pthread_mutex_t mutex1, mutex2, startMutex;
 
