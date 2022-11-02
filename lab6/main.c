@@ -65,7 +65,7 @@ int readStrings(char **strings, int *strCount)
         idx++;
         if (readCount == 1) idx--; 
     }
-    *strCount = idx
+    *strCount = idx;
     return CORRECT_CODE;
 }
 
