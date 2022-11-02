@@ -39,6 +39,8 @@ void *print_strings(void *param) {
             pthread_exit(NULL);
         }
     }
+    unlock_mutex(&mutex2);
+    unlock_mutex(&startMutex);
     pthread_exit(NULL);
 }
 
