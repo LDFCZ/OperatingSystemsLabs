@@ -32,7 +32,7 @@ void freeStrings(char **strings, int strCount)
     {
         free(strings[i]);
     }
-    free(strings);
+    //free(strings);
 }
 
 // Returns number of strings read or -1 if something goes wrong
@@ -64,7 +64,7 @@ int readStrings(char **strings)
         idx++;
         if (readCount == 1)
         {
-            free(strings[idx]);
+            //free(strings[idx]);
             idx--;
         }
     }
@@ -79,12 +79,12 @@ void doCleanUp(char **strings, int strCount, pthread_t *threads)
 
 int main()
 {
-    char **strings = (char **)malloc(sizeof(char *) * MAX_NUM_STR);
-    if (strings == NULL)
-    {
-        fprintf(stderr, "Malloc error\n");
-        return EXCEPTION_EXIT_CODE;
-    }
+    char *strings[MAX_NUM_STR];
+    //if (strings == NULL)
+    //{
+    //    fprintf(stderr, "Malloc error\n");
+    //    return EXCEPTION_EXIT_CODE;
+    //}
 
     int strCount = readStrings(strings);
     if (strCount == EXCEPTION_CODE)
