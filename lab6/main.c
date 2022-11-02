@@ -32,11 +32,10 @@ void freeStrings(char **strings, int strCount)
     {
         free(strings[i]);
     }
-    //free(strings);
 }
 
 // Returns number of strings read or -1 if something goes wrong
-int readStrings(char **strings)
+int readStrings(char **strings, int *strCount)
 {
     int readCount = 2;
     int idx = 0;
@@ -48,27 +47,26 @@ int readStrings(char **strings)
         strings[idx] = (char *)malloc(sizeof(char) * strlen);
         if (strings[idx] == NULL)
         {
-            fprintf(stderr, "Malloc error\n");
-            freeStrings(strings, idx);
+            fprintf(stderr, "Malloc error %s\n", strerror(errno));
+            //freeStrings(strings, idx);
+            *strCount = idx;
             return EXCEPTION_CODE;
         }
 
         readCount = getline(&strings[idx], &strlen, stdin);
         if (readCount == EXCEPTION_CODE) 
         {
-            fprintf(stderr, "Getline error\n");
-            freeStrings(strings, idx);
+            fprintf(stderr, "Getline error %s\n", strerror(errno));
+            //freeStrings(strings, idx);
+            *strCount = idx;
             return EXCEPTION_CODE;
         }
 
         idx++;
-        if (readCount == 1)
-        {
-            //free(strings[idx]);
-            idx--;
-        }
+        if (readCount == 1) idx--; 
     }
-    return idx;
+    *strCount = idx
+    return CORRECT_CODE;
 }
 
 void doCleanUp(char **strings, int strCount, pthread_t *threads)
@@ -80,15 +78,11 @@ void doCleanUp(char **strings, int strCount, pthread_t *threads)
 int main()
 {
     char *strings[MAX_NUM_STR];
-    //if (strings == NULL)
-    //{
-    //    fprintf(stderr, "Malloc error\n");
-    //    return EXCEPTION_EXIT_CODE;
-    //}
-
-    int strCount = readStrings(strings);
-    if (strCount == EXCEPTION_CODE)
+    int strCount;
+    int read_str_err = readStrings(strings, &strCount);
+    if (read_str_err == EXCEPTION_CODE)
     {
+        freeStrings(strings, strCount);
         return EXCEPTION_EXIT_CODE;
     }
 
@@ -97,7 +91,7 @@ int main()
     pthread_t *threads = malloc(sizeof(pthread_t) * strCount);
     if (threads == NULL)
     {
-        fprintf(stderr, "Malloc error\n");
+        fprintf(stderr, "Malloc error %s\n", strerror(errno));
         freeStrings(strings, strCount);
         return EXCEPTION_EXIT_CODE;
     }
