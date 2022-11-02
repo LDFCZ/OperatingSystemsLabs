@@ -34,7 +34,6 @@ void freeStrings(char **strings, int strCount)
     }
 }
 
-// Returns number of strings read or -1 if something goes wrong
 int readStrings(char **strings, int *strCount)
 {
     int readCount = 2;
@@ -47,8 +46,7 @@ int readStrings(char **strings, int *strCount)
         strings[idx] = (char *)malloc(sizeof(char) * strlen);
         if (strings[idx] == NULL)
         {
-            fprintf(stderr, "Malloc error %s\n", strerror(errno));
-            //freeStrings(strings, idx);
+            fprintf(stderr, "Malloc error: %s\n", strerror(errno));
             *strCount = idx;
             return EXCEPTION_CODE;
         }
@@ -56,8 +54,7 @@ int readStrings(char **strings, int *strCount)
         readCount = getline(&strings[idx], &strlen, stdin);
         if (readCount == EXCEPTION_CODE) 
         {
-            fprintf(stderr, "Getline error %s\n", strerror(errno));
-            //freeStrings(strings, idx);
+            fprintf(stderr, "Getline error: %s\n", strerror(errno));
             *strCount = idx;
             return EXCEPTION_CODE;
         }
@@ -91,7 +88,7 @@ int main()
     pthread_t *threads = malloc(sizeof(pthread_t) * strCount);
     if (threads == NULL)
     {
-        fprintf(stderr, "Malloc error %s\n", strerror(errno));
+        fprintf(stderr, "Malloc error: %s\n", strerror(errno));
         freeStrings(strings, strCount);
         return EXCEPTION_EXIT_CODE;
     }
