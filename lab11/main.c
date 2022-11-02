@@ -20,14 +20,14 @@ void *print_strings(void *param) {
     int lock_code, unlock_code;
     lock_code = pthread_mutex_lock(&startMutex);
     if (lock_code != CORRECT_CODE) {
-        print_error(lock_code, "Mutex lock error")
+        print_error(lock_code, "Mutex lock error");
         pthread_exit(NULL);
     }
 
     for (int i = 0; i < SRT_COUNT; ++i) {
         lock_code = pthread_mutex_lock(&mutex2);
         if (lock_code != CORRECT_CODE) {
-            print_error(lock_code, "Mutex lock error")
+            print_error(lock_code, "Mutex lock error");
             pthread_exit(NULL);
         }
 
@@ -35,7 +35,7 @@ void *print_strings(void *param) {
 
         unlock_code = pthread_mutex_unlock(&mutex1);
         if (unlock_code != CORRECT_CODE) {
-            print_error(unlock_code, "Mutex unlock error")
+            print_error(unlock_code, "Mutex unlock error");
             pthread_exit(NULL);
         }
     }
@@ -82,14 +82,14 @@ void destroy_mutexes() {
 void lock_mutex(pthread_mutex_t *mutex) {
     int lock_code = pthread_mutex_lock(mutex);
     if (lock_code != CORRECT_CODE) {
-        print_error(lock_code, "Mutex lock error")
+        print_error(lock_code, "Mutex lock error");
     }
 }
 
 void unlock_mutex(pthread_mutex_t *mutex) {
     int unlock_code = pthread_mutex_unlock(mutex);
     if (unlock_code != CORRECT_CODE) {
-        print_error(unlock_code, "Mutex unlock error")
+        print_error(unlock_code, "Mutex unlock error");
     }
 }
 
@@ -119,9 +119,9 @@ int main(int argc, char **argv) {
     unlock_mutex(&startMutex);
 
     for (int i = 0; i < SRT_COUNT; ++i) {
-        lock_mutex(&mutex1)
+        lock_mutex(&mutex1);
         printf("Main thread - %d\n", i);
-        unlock_mutex(&mutex2)
+        unlock_mutex(&mutex2);
     }
 
     int join_code = pthread_join(thread, NULL);
@@ -129,6 +129,6 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Thread joining error %d: %s\n", join_code, strerror(join_code));
     }
 
-    destroy_mutexes()
+    destroy_mutexes();
     pthread_exit(NULL);
 }
