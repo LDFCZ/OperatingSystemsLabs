@@ -31,27 +31,18 @@ void unlock_mutex(pthread_mutex_t *mutex) {
 }
 
 void *print_strings(void *param) {
-    int lock_code, unlock_code;
-    lock_code = pthread_mutex_lock(&startMutex);
+    int lock_code = pthread_mutex_lock(&startMutex);
     if (lock_code != CORRECT_CODE) {
         print_error(lock_code, "Mutex lock error");
         pthread_exit(NULL);
     }
-
+    
     for (int i = 0; i < SRT_COUNT; ++i) {
-        lock_code = pthread_mutex_lock(&mutex2);
-        if (lock_code != CORRECT_CODE) {
-            print_error(lock_code, "Mutex lock error");
-            pthread_exit(NULL);
-        }
+        lock_mutex(&mutex2); 
 
         printf("Thread - %d\n", i);
 
-        unlock_code = pthread_mutex_unlock(&mutex1);
-        if (unlock_code != CORRECT_CODE) {
-            print_error(unlock_code, "Mutex unlock error");
-            pthread_exit(NULL);
-        }
+        unlock_mutex(&mutex1);
     }
     unlock_mutex(&mutex2);
     unlock_mutex(&startMutex);
