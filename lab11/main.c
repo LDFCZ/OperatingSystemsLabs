@@ -123,5 +123,5 @@ int main(int argc, char **argv) {
     }
 
     destroy_mutexes();
-    pthread_exit(NULL);
+    return CORRECT_EXIT_CODE;
 }
