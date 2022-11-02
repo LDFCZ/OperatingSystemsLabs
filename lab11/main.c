@@ -104,7 +104,7 @@ int main(int argc, char **argv) {
 
     int lock_code = pthread_mutex_lock(&startMutex);
     if (lock_code != CORRECT_CODE) {
-        print_error(lock_code, "Start mutex lock error")
+        print_error(lock_code, "Start mutex lock error");
         destroy_mutexes();
         return EXCEPTION_CODE;
     }
