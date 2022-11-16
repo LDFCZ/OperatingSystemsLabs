@@ -125,7 +125,11 @@ int main(int argc, char **argv) {
     unlock_mutex(&startMutex);
 
     for (int i = 0; i < SRT_COUNT; ++i) {
-        lock_mutex(&mutex1);
+        //lock_mutex(&mutex1);
+        int lock_code = pthread_mutex_lock(&mutex1);
+            if (lock_code != CORRECT_CODE) {
+                print_error(lock_code, "Mutex1 lock error");
+        }
         printf("Main thread - %d\n", i);
         unlock_mutex(&mutex2);
     }
