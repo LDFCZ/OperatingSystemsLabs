@@ -38,6 +38,7 @@ void *print_strings(void *param) {
     }
     
     for (int i = 0; i < SRT_COUNT; ++i) {
+        printf("Thread - %d\n", i);
         lock_mutex(&mutex2); 
 
         printf("Thread - %d\n", i);
