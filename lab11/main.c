@@ -37,7 +37,7 @@ void *print_strings(void *param) {
         pthread_exit(NULL);
     }
     unlock_mutex(&startMutex);
-    
+
     for (int i = 0; i < SRT_COUNT; ++i) {
         //printf("Thread - %d\n", i);
         lock_mutex(&mutex2); 
@@ -58,10 +58,10 @@ int initialize_mutexes() {
         print_error(code, "Mutex attributes could not be created");
     }
 
-    //code = pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_ERRORCHECK);
-    //if (code != CORRECT_CODE) {
-    //    print_error(code, "Mutex attribute type could not be set");
-    //}
+    code = pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_ERRORCHECK);
+    if (code != CORRECT_CODE) {
+        print_error(code, "Mutex attribute type could not be set");
+    }
 
 
     int init_code;
