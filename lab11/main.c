@@ -38,7 +38,7 @@ void *print_strings(void *param) {
     }
     
     for (int i = 0; i < SRT_COUNT; ++i) {
-        printf("Thread - %d\n", i);
+        //printf("Thread - %d\n", i);
         lock_mutex(&mutex2); 
 
         printf("Thread - %d\n", i);
@@ -125,11 +125,7 @@ int main(int argc, char **argv) {
     unlock_mutex(&startMutex);
 
     for (int i = 0; i < SRT_COUNT; ++i) {
-        //lock_mutex(&mutex1);
-        int lock_code = pthread_mutex_lock(&mutex1);
-            if (lock_code != CORRECT_CODE) {
-                print_error(lock_code, "Mutex1 lock error");
-        }
+        lock_mutex(&mutex1);
         printf("Main thread - %d\n", i);
         unlock_mutex(&mutex2);
     }
