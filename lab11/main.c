@@ -57,10 +57,10 @@ int initialize_mutexes() {
         print_error(code, "Mutex attributes could not be created");
     }
 
-    code = pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_ERRORCHECK);
-    if (code != CORRECT_CODE) {
-        print_error(code, "Mutex attribute type could not be set");
-    }
+    //code = pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_ERRORCHECK);
+    //if (code != CORRECT_CODE) {
+    //    print_error(code, "Mutex attribute type could not be set");
+    //}
 
 
     int init_code;
