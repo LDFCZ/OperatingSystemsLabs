@@ -36,6 +36,7 @@ void *print_strings(void *param) {
         print_error(lock_code, "Start mutex lock error");
         pthread_exit(NULL);
     }
+    unlock_mutex(&startMutex);
     
     for (int i = 0; i < SRT_COUNT; ++i) {
         //printf("Thread - %d\n", i);
@@ -46,7 +47,7 @@ void *print_strings(void *param) {
         unlock_mutex(&mutex1);
     }
     unlock_mutex(&mutex2);
-    unlock_mutex(&startMutex);
+    
     pthread_exit(NULL);
 }
 
