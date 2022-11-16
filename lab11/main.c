@@ -33,7 +33,7 @@ void unlock_mutex(pthread_mutex_t *mutex) {
 void *print_strings(void *param) {
     int lock_code = pthread_mutex_lock(&startMutex);
     if (lock_code != CORRECT_CODE) {
-        print_error(lock_code, "Mutex lock error");
+        print_error(lock_code, "Start mutex lock error");
         pthread_exit(NULL);
     }
     
