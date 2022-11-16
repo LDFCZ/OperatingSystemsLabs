@@ -39,11 +39,8 @@ void *print_strings(void *param) {
     unlock_mutex(&startMutex);
 
     for (int i = 0; i < SRT_COUNT; ++i) {
-        //printf("Thread - %d\n", i);
         lock_mutex(&mutex2); 
-
         printf("Thread - %d\n", i);
-
         unlock_mutex(&mutex1);
     }
     unlock_mutex(&mutex2);
@@ -52,30 +49,19 @@ void *print_strings(void *param) {
 }
 
 int initialize_mutexes() {
-    pthread_mutexattr_t attr;
-    int code = pthread_mutexattr_init(&attr);
-    if (code != CORRECT_CODE) {
-        print_error(code, "Mutex attributes could not be created");
-    }
-
-    code = pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_ERRORCHECK);
-    if (code != CORRECT_CODE) {
-        print_error(code, "Mutex attribute type could not be set");
-    }
-
-
+    
     int init_code;
-    init_code = pthread_mutex_init(&startMutex, &attr);
+    init_code = pthread_mutex_init(&startMutex, NULL);
     if (init_code != CORRECT_CODE) {
         print_error(init_code, "Mutex init error");
         return EXCEPTION_CODE;
     }
-    init_code = pthread_mutex_init(&mutex1, &attr);
+    init_code = pthread_mutex_init(&mutex1, NULL);
     if (init_code != CORRECT_CODE) {
         print_error(init_code, "Mutex init error");
         return EXCEPTION_CODE;
     }
-    init_code = pthread_mutex_init(&mutex2, &attr);
+    init_code = pthread_mutex_init(&mutex2, NULL);
     if (init_code != CORRECT_CODE) {
         print_error(init_code, "Mutex init error");
         return EXCEPTION_CODE;
@@ -85,6 +71,7 @@ int initialize_mutexes() {
 }
 
 void destroy_mutexes() {
+
     int destroy_code;
     destroy_code = pthread_mutex_destroy(&startMutex);
     if (destroy_code != CORRECT_CODE) {
