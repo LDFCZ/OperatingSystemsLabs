@@ -147,7 +147,7 @@ void* print_text_in_thread(void* args) {
         unlock_mutex(thisMutex);
         thisMutex = nextMutex;
     }
-    unlockMutex(thisMutex);
+    unlock_mutex(thisMutex);
     return NULL;
 }
 
