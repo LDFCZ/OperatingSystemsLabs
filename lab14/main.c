@@ -22,16 +22,22 @@ void print_error(int return_code, char *additional_message) {
     fprintf(stderr, "%s %d: %s\n", additional_message, return_code, strerror(return_code));
 }
 
+int error_check(int code, char* inscription) {
+    if (code != SUCCESS) {
+        perror(inscription);
+        return code;
+    }
+    return SUCCESS;
+}
+
 int destroy_sems(int number) {
     for (int i = 0; i < number; i++) {
         int post_code = sem_post(&sems[i]);
-        if (post_code != SUCCESS) {
-            print_error(post_code, "Semaphore post error");
+        if (error_check(post_code, "Semaphore post error") != SUCCESS) {
             return EXCEPTION_CODE;
         }
         int destroy_code = sem_destroy(&sems[i]);
-        if (destroy_code != SUCCESS) {
-            print_error(destroy_code, "Destroying semaphore error");
+        if (error_check(destroy_code, "Destroying semaphore error") != SUCCESS) {
             return EXCEPTION_CODE;
         }
     }
@@ -41,9 +47,8 @@ int destroy_sems(int number) {
 int initialize_sems() {
     for (int i = 0; i < NUMBER_OF_SEMAPHORES; ++i) {
         int init_code = sem_init(&sems[i], 0, i);
-        if (init_code != SUCCESS) {
-            print_error(init_code, "Sem_init error");
-            return init_code;
+        if (error_check(init_code,  "Sem_init error") != SUCCESS) {
+            return EXCEPTION_CODE;
         }
     }
     return SUCCESS;
@@ -76,14 +81,14 @@ void* printTextInThread(void* args) {
         this_sem = (value->start + 1) % NUMBER_OF_SEMAPHORES;
         next_sem = (this_sem + 1) % NUMBER_OF_SEMAPHORES;
         int wait_code = semaphore_wait(this_sem);
-        if (wait_code != SUCCESS) {
+        if (error_check(wait_code, "Semaphore wait error") != SUCCESS) {
             return NULL;
         }
 
         printf("%s %d\n", value->text, i);
 
         int post_code = semaphore_post(next_sem);
-        if (post_code != SUCCESS) {
+        if (error_check(wait_code, "Semaphore post error") != SUCCESS) {
             return NULL;
         }
     }
