@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #define SUCCESS 0
+#define EXCEPTION_CODE 1
 #define NUMBER_OF_SEMAPHORES 2
 
 #define SRT_COUNT 10
@@ -17,23 +18,21 @@ typedef struct thread_arg {
     int start;
 } thread_arg;
 
-int error_check(int code, char* inscription) {
-    if (code != SUCCESS) {
-        perror(inscription);
-        return code;
-    }
-    return SUCCESS;
+void print_error(int return_code, char *additional_message) {
+    fprintf(stderr, "%s %d: %s\n", additional_message, return_code, strerror(return_code));
 }
 
 int destroy_sems(int number) {
     for (int i = 0; i < number; i++) {
-        errno = sem_post(&sems[i]);
-        if (error_check(errno, "Semaphore post error") != SUCCESS) {
-            return errno;
+        int post_code = sem_post(&sems[i]);
+        if (post_code != SUCCESS) {
+            print_error(post_code, "Semaphore post error")
+            return EXCEPTION_CODE;
         }
-        errno = sem_destroy(&sems[i]);
-        if (error_check(errno, "Destroying semaphore error") != SUCCESS) {
-            return errno;
+        int destroy_code = sem_destroy(&sems[i]);
+        if (destroy_code != SUCCESS) {
+            print_error(destroy_code, "Destroying semaphore error")
+            return EXCEPTION_CODE;
         }
     }
     return SUCCESS;
@@ -41,48 +40,50 @@ int destroy_sems(int number) {
 
 int initialize_sems() {
     for (int i = 0; i < NUMBER_OF_SEMAPHORES; ++i) {
-        errno = sem_init(&sems[i], 0, i);
-        if (error_check(errno, "Sem_init error") != SUCCESS) {
-            destroy_sems(i);
-            return errno;
+        int init_code = sem_init(&sems[i], 0, i);
+        if (init_code != SUCCESS) {
+            print_error(init_code, "Sem_init error")
+            return init_code;
         }
     }
     return SUCCESS;
 }
+
 int semaphore_wait(int num) {
-    errno = sem_wait(&sems[num]);
-    if (error_check(errno, "Semaphore wait error") != SUCCESS) {
-        return errno;
+    int wait_code = sem_wait(&sems[num]);
+    if (wait_code != SUCCESS) {
+        print_error(wait_code, "Semaphore wait error")
+        return EXCEPTION_CODE;
     }
     return SUCCESS;
 }
 
 int semaphore_post(int num) {
-    errno = sem_post(&sems[num]);
-    if (error_check(errno, "Semaphore post error") != SUCCESS) {
-        return errno;
+    int post_code = sem_post(&sems[num]);
+    if (post_code != SUCCESS) {
+        print_error(post_code, "Semaphore post error") 
+        return EXCEPTION_CODE;
     }
     return SUCCESS;
 }
 
 void* printTextInThread(void* args) {
     thread_arg* value = (thread_arg*)args;
-    errno = SUCCESS;
     int this_sem = 0,
         next_sem = 0;
 
     for (int i = 0; i < SRT_COUNT; i++) {
         this_sem = (value->start + 1) % NUMBER_OF_SEMAPHORES;
         next_sem = (this_sem + 1) % NUMBER_OF_SEMAPHORES;
-        errno = semaphore_wait(this_sem);
-        if (error_check(errno, "Semaphore wait error") != SUCCESS) {
+        int wait_code = semaphore_wait(this_sem);
+        if (wait_code != SUCCESS) {
             return NULL;
         }
 
         printf("%s %d\n", value->text, i);
 
-        errno = semaphore_post(next_sem);
-        if (error_check(errno, "Semaphore post error") != SUCCESS) {
+        int post_code = semaphore_post(next_sem);
+        if (post_code != SUCCESS) {
             return NULL;
         }
     }
@@ -93,23 +94,24 @@ int main(int argc, char* argv[]) {
     pthread_t thread;
     thread_arg newThread = { "Hello, I'm new thread", 1};
     thread_arg mainThread = { "Hello, I'm main thread", 0};
-    errno = initialize_sems();
-    if (errno != SUCCESS) {
-        exit(errno);
+    int init_code = initialize_sems();
+    if (init_code != SUCCESS) {
+        destroy_sems(NUMBER_OF_SEMAPHORES);
+        exit(init_code);
     }
 
-    errno = pthread_create(&thread, NULL, printTextInThread, &newThread);
-    if (error_check(errno, "Creating thread error") != SUCCESS) {
+    int create_code = pthread_create(&thread, NULL, printTextInThread, &newThread);
+    if (print_error(create_code, "Creating thread error") != SUCCESS) {
         destroy_sems(NUMBER_OF_SEMAPHORES);
-        exit(errno);
+        exit(create_code);
     }
 
     printTextInThread(&mainThread);
 
-    errno = pthread_join(thread, NULL);
-    if (error_check(errno, "Joining thread error") != SUCCESS) {
+    int join_code = pthread_join(thread, NULL);
+    if (print_error(join_code, "Joining thread error") != SUCCESS) {
         destroy_sems(NUMBER_OF_SEMAPHORES);
-        exit(errno);
+        exit(join_code);
     }
 
     destroy_sems(NUMBER_OF_SEMAPHORES);
