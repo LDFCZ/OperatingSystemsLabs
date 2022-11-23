@@ -18,9 +18,7 @@ bool ready = false;
 
 typedef struct thread_arg {
     const char* text;
-    int count;
 } thread_arg;
-
 
 
 void print_error(int return_code, char *additional_message) {
@@ -40,45 +38,6 @@ void unlock_mutex(int i) {
         print_error(unlock_code, "Mutex unlock error");
     }
 }
-
-/*void *print_strings(void *param) {
-    int lock_code = pthread_mutex_lock(&startMutex);
-    if (lock_code != CORRECT_CODE) {
-        print_error(lock_code, "Start mutex lock error");
-        pthread_exit(NULL);
-    }
-    unlock_mutex(&startMutex);
-
-    for (int i = 0; i < SRT_COUNT; ++i) {
-        lock_mutex(&mutex2); 
-        printf("Thread - %d\n", i);
-        unlock_mutex(&mutex1);
-    }
-    unlock_mutex(&mutex2);
-    
-    pthread_exit(NULL);
-}*/
-
-/*int initialize_mutexes() {
-    
-    int init_code;
-    init_code = pthread_mutex_init(&startMutex, NULL);
-    if (init_code != CORRECT_CODE) {
-        print_error(init_code, "Mutex init error");
-        return EXCEPTION_CODE;
-    }
-    init_code = pthread_mutex_init(&mutex1, NULL);
-    if (init_code != CORRECT_CODE) {
-        print_error(init_code, "Mutex init error");
-        return EXCEPTION_CODE;
-    }
-    init_code = pthread_mutex_init(&mutex2, NULL);
-    if (init_code != CORRECT_CODE) {
-        print_error(init_code, "Mutex init error");
-        return EXCEPTION_CODE;
-    }
-   
-}*/
 
 int initialize_mutexes() {
     pthread_mutexattr_t attr;
@@ -105,23 +64,6 @@ int initialize_mutexes() {
     return CORRECT_CODE;
 }
 
-/*void destroy_mutexes() {
-
-    int destroy_code;
-    destroy_code = pthread_mutex_destroy(&startMutex);
-    if (destroy_code != CORRECT_CODE) {
-        print_error(destroy_code, "Mutex destroy error");
-    }
-    destroy_code = pthread_mutex_destroy(&mutex1);
-    if (destroy_code != CORRECT_CODE) {
-        print_error(destroy_code, "Mutex destroy error");
-    }
-    destroy_code = pthread_mutex_destroy(&mutex2);
-    if (destroy_code != CORRECT_CODE) {
-        print_error(destroy_code, "Mutex destroy error");
-    }
-}*/
-
 void destroy_mutexes() {
     for (int i = 0; i < COUNT_MUTEXES; ++i) {
         int code = pthread_mutex_destroy(&mutex_array[i]);
@@ -140,7 +82,7 @@ void* print_text_in_thread(void* args) {
         lock_mutex(thisMutex);
         ready = true;
     }
-    for (int i = 0; i < value->count; ++i) {
+    for (int i = 0; i < SRT_COUNT; ++i) {
         nextMutex = (thisMutex + 1) % COUNT_MUTEXES;
         lock_mutex(nextMutex);
         printf("%d %s\n", i, value->text);
@@ -151,12 +93,11 @@ void* print_text_in_thread(void* args) {
     return NULL;
 }
 
-
 int main(int argc, char **argv) {
     pthread_t thread;
 
-    thread_arg new_thread = { "Hello, I'm new thread\n", 10 };
-    thread_arg main_thread = { "Hello, I'm main thread\n", 10 };
+    thread_arg new_thread = { "Hello, I'm new thread\n" };
+    thread_arg main_thread = { "Hello, I'm main thread\n" };
 
     int init_code = initialize_mutexes();
     if (init_code != CORRECT_CODE) {
