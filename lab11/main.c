@@ -137,14 +137,14 @@ void* print_text_in_thread(void* args) {
     int nextMutex = 0;
     if (!ready) {
         thisMutex = 2;
-        lockMutex(thisMutex);
+        lock_mutex(thisMutex);
         ready = true;
     }
     for (int i = 0; i < value->count; ++i) {
         nextMutex = (thisMutex + 1) % COUNT_MUTEXES;
-        lockMutex(nextMutex);
+        lock_mutex(nextMutex);
         printf("%d %s\n", i, value->text);
-        unlockMutex(thisMutex);
+        unlock_mutex(thisMutex);
         thisMutex = nextMutex;
     }
     unlockMutex(thisMutex);
@@ -179,7 +179,7 @@ int main(int argc, char **argv) {
 
     while (ready != true) {};
 
-    print_text_in_thread((void*)&main_thread)
+    print_text_in_thread((void*)&main_thread);
 
     int join_code = pthread_join(thread, NULL);
     if (join_code != CORRECT_CODE) {
