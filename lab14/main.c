@@ -97,8 +97,8 @@ void* printTextInThread(void* args) {
 
 int main(int argc, char* argv[]) {
     pthread_t thread;
-    thread_arg newThread = { "Hello, I'm new thread", 1};
-    thread_arg mainThread = { "Hello, I'm main thread", 0};
+    thread_arg newThread = { "Hello, I'm new thread", 0};
+    thread_arg mainThread = { "Hello, I'm main thread", 1};
     int init_code = initialize_sems();
     if (init_code != SUCCESS) {
         destroy_sems(NUMBER_OF_SEMAPHORES);
