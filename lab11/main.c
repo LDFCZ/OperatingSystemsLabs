@@ -9,6 +9,8 @@
 #define CORRECT_EXIT_CODE 0
 #define EXCEPTION_EXIT_CODE 1
 
+#define START_MUTEX 0
+
 #define SRT_COUNT 10
 
 #define COUNT_MUTEXES 3
@@ -25,18 +27,22 @@ void print_error(int return_code, char *additional_message) {
     fprintf(stderr, "%s %d: %s\n", additional_message, return_code, strerror(return_code));
 }
 
-void lock_mutex(int i) {
+int lock_mutex(int i) {
     int lock_code = pthread_mutex_lock(&mutex_array[i]);
     if (lock_code != CORRECT_CODE) {
         print_error(lock_code, "Mutex lock error");
+        return EXCEPTION_CODE;
     }
+    return CORRECT_CODE;
 }
 
-void unlock_mutex(int i) {
+int unlock_mutex(int i) {
     int unlock_code = pthread_mutex_unlock(&mutex_array[i]);
     if (unlock_code != CORRECT_CODE) {
         print_error(unlock_code, "Mutex unlock error");
+        return EXCEPTION_CODE;
     }
+    return CORRECT_CODE;
 }
 
 int initialize_mutexes() {
@@ -75,18 +81,31 @@ void destroy_mutexes() {
 
 void* print_text_in_thread(void* args) {
     thread_arg* value = (thread_arg*)args;
+    int lock_status, unlock_status;
     int thisMutex = 0;
     int nextMutex = 0;
     if (!ready) {
         thisMutex = 2;
-        lock_mutex(thisMutex);
+        lock_status = lock_mutex(thisMutex);
+        if (lock_status != CORRECT_CODE) {
+            return NULL;
+        }
         ready = true;
     }
     for (int i = 0; i < SRT_COUNT; ++i) {
         nextMutex = (thisMutex + 1) % COUNT_MUTEXES;
-        lock_mutex(nextMutex);
+
+        lock_status = lock_mutex(nextMutex);
+        if (lock_status != CORRECT_CODE) {
+            return NULL;
+        }
+
         printf("%d %s\n", i, value->text);
-        unlock_mutex(thisMutex);
+
+        unlock_status = unlock_mutex(thisMutex);
+        if (unlock_status != CORRECT_CODE) {
+            return NULL;
+        }
         thisMutex = nextMutex;
     }
     unlock_mutex(thisMutex);
@@ -105,9 +124,8 @@ int main(int argc, char **argv) {
         return EXCEPTION_CODE;
     }
 
-    int lock_code = pthread_mutex_lock(&mutex_array[0]);
-    if (lock_code != CORRECT_CODE) {
-        print_error(lock_code, "Start mutex lock error");
+    int lock_status = lock_mutex(START_MUTEX);
+    if (lock_status != CORRECT_CODE) {
         destroy_mutexes();
         return EXCEPTION_CODE;
     }
