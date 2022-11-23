@@ -101,7 +101,7 @@ int main(int argc, char* argv[]) {
     }
 
     int create_code = pthread_create(&thread, NULL, printTextInThread, &newThread);
-    if (create_code! = SUCCESS) {
+    if (create_code != SUCCESS) {
         print_error(create_code, "Creating thread error");
         destroy_sems(NUMBER_OF_SEMAPHORES);
         exit(create_code);
