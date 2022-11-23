@@ -22,12 +22,10 @@ int main(int argc, char **argv)
     //Неясно какой поток захватит мьютекс первым - поэтому решение с 2-мя мьютексами не подходит
     pthread_mutex_init(&mutex1, NULL);
     pthread_mutex_init(&mutex2, NULL);
-    int err = pthread_create(&thread, NULL, threadFunction, NULL);
-    if (err)
-    {
-        printf("Error №%d: %s\n", err, strerror(err));
-    }
-    sleep(1);
+    
+    pthread_create(&thread, NULL, threadFunction, NULL);
+    
+    //sleep(1);
     pthread_mutex_lock(&mutex2);
     for (int i = 0; i < 5; ++i)
     {
