@@ -83,20 +83,20 @@ void unlock_mutex(int i) {
 int initialize_mutexes() {
     pthread_mutexattr_t attr;
     int code = pthread_mutexattr_init(&attr);
-    if (code != SUCCESS) {
+    if (code != CORRECT_CODE) {
         print_error(code, "Mutex attributes could not be created");
         return EXCEPTION_CODE;
     }
 
     code = pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_ERRORCHECK);
-    if (code != SUCCESS) {
+    if (code != CORRECT_CODE) {
         print_error(code, "Mutex attribute type could not be set");
         return EXCEPTION_CODE;
     }
 
     for (int i = 0; i < COUNT_MUTEXES; ++i) {
         code = pthread_mutex_init(&mutex_array[i], &attr);
-        if (code != SUCCESS) {
+        if (code != CORRECT_CODE) {
             print_error(code, "Mutex init error");
             return EXCEPTION_CODE;
         }
@@ -125,7 +125,7 @@ int initialize_mutexes() {
 void destroy_mutexes() {
     for (int i = 0; i < COUNT_MUTEXES; ++i) {
         int code = pthread_mutex_destroy(&mutex_array[i]);
-        if (code != SUCCESS) {
+        if (code != CORRECT_CODE) {
             print_error(code, "mutex could not  be destroy");
         }
     }
