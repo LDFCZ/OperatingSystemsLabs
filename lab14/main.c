@@ -26,12 +26,12 @@ int destroy_sems(int number) {
     for (int i = 0; i < number; i++) {
         int post_code = sem_post(&sems[i]);
         if (post_code != SUCCESS) {
-            print_error(post_code, "Semaphore post error")
+            print_error(post_code, "Semaphore post error");
             return EXCEPTION_CODE;
         }
         int destroy_code = sem_destroy(&sems[i]);
         if (destroy_code != SUCCESS) {
-            print_error(destroy_code, "Destroying semaphore error")
+            print_error(destroy_code, "Destroying semaphore error");
             return EXCEPTION_CODE;
         }
     }
@@ -42,7 +42,7 @@ int initialize_sems() {
     for (int i = 0; i < NUMBER_OF_SEMAPHORES; ++i) {
         int init_code = sem_init(&sems[i], 0, i);
         if (init_code != SUCCESS) {
-            print_error(init_code, "Sem_init error")
+            print_error(init_code, "Sem_init error");
             return init_code;
         }
     }
@@ -52,7 +52,7 @@ int initialize_sems() {
 int semaphore_wait(int num) {
     int wait_code = sem_wait(&sems[num]);
     if (wait_code != SUCCESS) {
-        print_error(wait_code, "Semaphore wait error")
+        print_error(wait_code, "Semaphore wait error");
         return EXCEPTION_CODE;
     }
     return SUCCESS;
@@ -61,7 +61,7 @@ int semaphore_wait(int num) {
 int semaphore_post(int num) {
     int post_code = sem_post(&sems[num]);
     if (post_code != SUCCESS) {
-        print_error(post_code, "Semaphore post error") 
+        print_error(post_code, "Semaphore post error") ;
         return EXCEPTION_CODE;
     }
     return SUCCESS;
@@ -101,7 +101,8 @@ int main(int argc, char* argv[]) {
     }
 
     int create_code = pthread_create(&thread, NULL, printTextInThread, &newThread);
-    if (print_error(create_code, "Creating thread error") != SUCCESS) {
+    if (create_code! = SUCCESS) {
+        print_error(create_code, "Creating thread error");
         destroy_sems(NUMBER_OF_SEMAPHORES);
         exit(create_code);
     }
@@ -109,7 +110,8 @@ int main(int argc, char* argv[]) {
     printTextInThread(&mainThread);
 
     int join_code = pthread_join(thread, NULL);
-    if (print_error(join_code, "Joining thread error") != SUCCESS) {
+    if (join_code != SUCCESS) {
+        print_error(join_code, "Joining thread error");
         destroy_sems(NUMBER_OF_SEMAPHORES);
         exit(join_code);
     }
