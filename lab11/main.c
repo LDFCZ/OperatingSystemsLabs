@@ -96,8 +96,8 @@ void* print_text_in_thread(void* args) {
 int main(int argc, char **argv) {
     pthread_t thread;
 
-    thread_arg new_thread = { "Hello, I'm new thread\n" };
-    thread_arg main_thread = { "Hello, I'm main thread\n" };
+    thread_arg new_thread = { "Hello, I'm new thread" };
+    thread_arg main_thread = { "Hello, I'm main thread" };
 
     int init_code = initialize_mutexes();
     if (init_code != CORRECT_CODE) {
