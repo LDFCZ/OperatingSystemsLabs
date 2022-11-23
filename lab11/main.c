@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define EXCEPTION_CODE 1
 #define CORRECT_CODE 0
@@ -40,7 +41,7 @@ void unlock_mutex(int i) {
     }
 }
 
-void *print_strings(void *param) {
+/*void *print_strings(void *param) {
     int lock_code = pthread_mutex_lock(&startMutex);
     if (lock_code != CORRECT_CODE) {
         print_error(lock_code, "Start mutex lock error");
@@ -56,7 +57,7 @@ void *print_strings(void *param) {
     unlock_mutex(&mutex2);
     
     pthread_exit(NULL);
-}
+}*/
 
 /*int initialize_mutexes() {
     
@@ -170,7 +171,7 @@ int main(int argc, char **argv) {
         return EXCEPTION_CODE;
     }
 
-    int create_code = pthread_create(&thread, NULL, print_strings, (void*)&new_thread);
+    int create_code = pthread_create(&thread, NULL, print_text_in_thread, (void*)&new_thread);
     if (create_code != CORRECT_CODE) {
         printf("Error №%d: %s\n", create_code, strerror(create_code));
         print_error(create_code, "Create error ");
