@@ -190,7 +190,9 @@ void readToCache(
 
     int offset = 0;
     int read_bytes = 0;
-    while((read_bytes = read(clientsHttpSockets[clientIndex], &((cache[currentCacheSize].page)[offset]), BUFFER_SIZE)) != 0) {
+    read_bytes = read(clientsHttpSockets[clientIndex], &cache[currentCacheSize].page[offset], BUFFER_SIZE)
+    printf("r - %d\n", read_bytes);
+    while((read_bytes = read(clientsHttpSockets[clientIndex], &cache[currentCacheSize].page[offset], BUFFER_SIZE)) != 0) {
         offset += read_bytes;
         if(DEBUG)printf("[DEBUG]: cache[%d].page size = %d\n", currentCacheSize , cache[currentCacheSize].page_size);
         if(DEBUG)printf("[DEBUG]: read_bytes = %d. offset = %d\n", read_bytes, offset);
@@ -235,8 +237,7 @@ void sendRequest(
     } else{
         char *request = createRequest(url);
         if(DEBUG)printf("[DEBUG]: REQUEST: %s", request);
-        int s = write(clientsHttpSockets[clientIndex], request, strlen(request));
-        printf("w - %d\n", s);
+        write(clientsHttpSockets[clientIndex], request, strlen(request));
         free(request);
     }
 }
