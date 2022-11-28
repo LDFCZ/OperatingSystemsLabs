@@ -164,8 +164,9 @@ url_t * parseURL(char *urlBuffer) {
         if (urlBuffer[strIndex] == '/') {
             if (strIndex + 1 == urlBufferSize) {
                 urlBuffer[strIndex] = '\0';
-                break;
+                //break;
             }
+            urlBuffer[strIndex] = '\0';
             url->host = (char *) malloc(sizeof(char) * (startPortIndex + 1));
             url->path = (char *) malloc(sizeof(char) * (urlBufferSize - strIndex));
             strncpy(url->host, urlBuffer, strIndex + 1);
