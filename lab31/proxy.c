@@ -172,9 +172,8 @@ url_t * parseURL(char *urlBuffer) {
             strncpy(url->host, urlBuffer, strIndex + 1);
             strncpy(url->path, &(urlBuffer[strIndex + 1]), urlBufferSize - strIndex);
             url->path[urlBufferSize - strIndex - 1] = 0;
-             printf("%d\n", urlBufferSize);
             printf("host = %s\n", url->host);
-            printf("path = %s\n %d\n", url->path, strlen(url->path));
+            printf("path = %s\n", url->path);
             break;
         }
     }
@@ -236,7 +235,8 @@ void sendRequest(
     } else{
         char *request = createRequest(url);
         if(DEBUG)printf("[DEBUG]: REQUEST: %s", request);
-        write(clientsHttpSockets[clientIndex], request, strlen(request));
+        int s = write(clientsHttpSockets[clientIndex], request, strlen(request));
+        printf("w - %d\n", s);
         free(request);
     }
 }
