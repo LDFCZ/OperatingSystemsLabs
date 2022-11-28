@@ -172,6 +172,7 @@ url_t * parseURL(char *urlBuffer) {
             strncpy(url->host, urlBuffer, strIndex + 1);
             strncpy(url->path, &(urlBuffer[strIndex + 1]), urlBufferSize - strIndex - 1);
             url->path[urlBufferSize - 2] = 0;
+             printf("%d\n", urlBufferSize);
             printf("host = %s\n", url->host);
             printf("path = %s\n %d\n", url->path, strlen(url->path));
             break;
