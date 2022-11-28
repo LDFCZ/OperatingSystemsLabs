@@ -190,8 +190,6 @@ void readToCache(
 
     int offset = 0;
     int read_bytes = 0;
-    read_bytes = read(clientsHttpSockets[clientIndex], &cache[currentCacheSize].page[offset], BUFFER_SIZE);
-    printf("r - %d\n", read_bytes);
     while((read_bytes = read(clientsHttpSockets[clientIndex], &cache[currentCacheSize].page[offset], BUFFER_SIZE)) != 0) {
         offset += read_bytes;
         if(DEBUG)printf("[DEBUG]: cache[%d].page size = %d\n", currentCacheSize , cache[currentCacheSize].page_size);
