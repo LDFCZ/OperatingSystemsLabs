@@ -296,10 +296,12 @@ int main(int argc, char *argv[]) {
             FD_SET(clients[client_i], &cfds);
 
             if (select(clients[client_i] + 1, &cfds, NULL, NULL, &timeout)) {
-                char url_buffer[ADDRESS_BUF_SIZE];
+                //char url_buffer[ADDRESS_BUF_SIZE];
+                size_t strlen = 200;
+                char* url_buffer = (char *)malloc(sizeof(char) * strlen);
                 //int read_bytes = read(clients[client_i], &url_buffer, ADDRESS_BUF_SIZE);
-                int read_bytes = fgets(&url_buffer, ADDRESS_BUF_SIZE, clients[client_i]);
-                url_buffer[strlen(url_buffer) - 1] = '\0';
+                int read_bytes = getline(&url_buffer, &strlen, clients[client_i]);
+                //url_buffer[strlen(url_buffer) - 1] = '\0';
                 if (read_bytes) {
                     url_buffer[read_bytes] = '\0';
                     printf("\"%s\"\n", url_buffer);
