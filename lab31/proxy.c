@@ -149,7 +149,7 @@ url_t *parse_URL(char *url_buffer) { // переписать
             while (port_i < PORT_LEN && portstr_i < url_buffer_size && isdigit(url_buffer[portstr_i])) {
                 port[port_i++] = url_buffer[portstr_i];
                 portstr_i++;
-                str_i++
+                str_i++;
             }
             url->port = atoi(port);
         }
@@ -308,7 +308,7 @@ int main(int argc, char *argv[]) {
                     }
                     url_t *url = parse_URL(url_buffer);
                     if (url == NULL) {
-                        rintf("URL parsing fail\n");
+                        printf("URL parsing fail\n");
                         continue;
                     }
                     printf("Connecting socket...\n");
