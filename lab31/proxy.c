@@ -16,7 +16,6 @@
 #include <termios.h>
 #include <ctype.h>
 
-
 #define MAX_CLIENTS_AMOUNT 10
 #define DEBUG 1
 #define ADDRESS_BUF_SIZE 256
@@ -54,7 +53,7 @@ int socketConnect(char *host, in_port_t port){
         return -1;
     }
     int on = 1;
-    setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (const char *)&on, sizeof(int));
+    setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (const char *)&on, sizeof(int)); // error read
 
     if (DEBUG) printf("host openned!\n");
 
@@ -107,8 +106,9 @@ int tryAcceptNewClient(
         int alreadyConnectedClientsNumber,
         struct timeval * timeout,
                 fd_set *lfds) {
+    printf("listenfd - %d\n", listenfd);
     if(alreadyConnectedClientsNumber < MAX_CLIENTS_AMOUNT) {
-        if(select(4, lfds, NULL, NULL, timeout)){
+        if(select(listenfd + 1, lfds, NULL, NULL, timeout)){
             if(DEBUG)printf("[DEBUG]: Can read from listen\n");
             acceptNewClient(listenfd, clients);
             alreadyConnectedClientsNumber++;
@@ -138,7 +138,7 @@ void freeURL(url_t *pUrl) {
     free(pUrl);
 }
 
-url_t * parseURL(char *urlBuffer) {
+url_t * parseURL(char *urlBuffer) { // переписать
     url_t * url = (url_t *) malloc(sizeof(url_t));
     url->path = NULL;
     url->host = NULL;
@@ -286,6 +286,7 @@ int main(int argc, char *argv[]) {
         sentBytes[k] = EMPTY;
     }
 
+    // error read
     addr_init(&serv_addr, SERVER_PORT);
 
     bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
@@ -318,7 +319,7 @@ int main(int argc, char *argv[]) {
             FD_ZERO(&cfds);
             FD_SET(clients[clientIndex], &cfds);
 
-            if(clientsHttpSockets[clientIndex] == EMPTY || select(clients[clientIndex] + 1, &cfds, NULL, NULL, &timeout)) {  //may ||
+            if(clientsHttpSockets[clientIndex] == EMPTY || select(clients[clientIndex] + 1, &cfds, NULL, NULL, &timeout)) {
                 char urlBuffer[ADDRESS_BUF_SIZE];
                 int read_bytes = read(clients[clientIndex], &urlBuffer, ADDRESS_BUF_SIZE);
                 if(read_bytes) {
