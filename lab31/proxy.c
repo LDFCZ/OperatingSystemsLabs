@@ -106,7 +106,6 @@ int tryAcceptNewClient(
         int alreadyConnectedClientsNumber,
         struct timeval * timeout,
                 fd_set *lfds) {
-    printf("listenfd - %d\n", listenfd);
     if(alreadyConnectedClientsNumber < MAX_CLIENTS_AMOUNT) {
         if(select(listenfd + 1, lfds, NULL, NULL, timeout)){
             if(DEBUG)printf("[DEBUG]: Can read from listen\n");
