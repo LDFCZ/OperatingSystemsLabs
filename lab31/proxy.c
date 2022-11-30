@@ -318,7 +318,7 @@ int main(int argc, char *argv[]) {
             FD_ZERO(&cfds);
             FD_SET(clients[clientIndex], &cfds);
 
-            if(clientsHttpSockets[clientIndex] == EMPTY && select(clients[clientIndex] + 1, &cfds, NULL, NULL, &timeout)) {  //may ||
+            if(clientsHttpSockets[clientIndex] == EMPTY || select(clients[clientIndex] + 1, &cfds, NULL, NULL, &timeout)) {  //may ||
                 char urlBuffer[ADDRESS_BUF_SIZE];
                 int read_bytes = read(clients[clientIndex], &urlBuffer, ADDRESS_BUF_SIZE);
                 if(read_bytes) {
