@@ -17,8 +17,8 @@
 #include <ctype.h>
 
 #define MAX_CLIENTS_AMOUNT 10
-#define DEBUG 1
-#define ADDRESS_BUF_SIZE 256
+
+#define ADDRESS_BUF_SIZE 512
 #define CACHE_SIZE 10
 #define BUFFER_SIZE 1024
 #define EMPTY -1
@@ -27,166 +27,142 @@
 
 #define PORT_LEN 5
 
-int socketConnect(char *host, in_port_t port)
-{
-    if (DEBUG)
-        printf("getting host...\n");
 
-    printf("host in function = %s\n", host);
 
+int socket_connect(char *host, in_port_t port) {
+    printf("getting host... host = %s\n", host);
     struct hostent *hp = gethostbyname(host);
-    if (hp == NULL)
-    {
-        perror("gethostbyname");
+    if (hp == NULL) {
+        perror("gethostbyname error");
         return -1;
     }
+    printf("host recived!\n");
 
-    if (DEBUG)
-        printf("host got!\n");
     struct sockaddr_in addr;
     memcpy(&addr.sin_addr, hp->h_addr, hp->h_length);
     addr.sin_port = htons(port);
     addr.sin_family = AF_INET;
 
-    if (DEBUG)
-        printf("opening host...\n");
+    printf("opening host...\n");
 
     int sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (sock == -1)
-    {
-        perror("socket");
-        return -1;
-    }
-    int on = 1;
-    setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (const char *)&on, sizeof(int)); // error read
-
-    if (DEBUG)
-        printf("host openned!\n");
-
-    if (connect(sock, (struct sockaddr *)&addr, sizeof(struct sockaddr_in)) == -1)
-    {
-        perror("connect");
+    if (sock == -1) {
+        perror("socket error");
         return -1;
     }
 
+    const int enable = 1;
+    if (setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, &enable, sizeof(int)) == -1) {
+        perror("setsockopt error");
+        return -1;
+    }
+
+    if (connect(sock, (struct sockaddr *)&addr, sizeof(struct sockaddr_in)) == -1) {
+        perror("connect error");
+        return -1;
+    }
+    printf("host openned!\n");
     return sock;
 }
 
-typedef struct cache
-{
+typedef struct cache {
     int page_size;
     char *title;
     char *page;
 } cache_t;
 
-typedef struct url
-{
+typedef struct url {
     char *host;
     char *path;
     int port;
 } url_t;
 
-void addr_init(struct sockaddr_in *addr, int port)
-{
+void addr_init(struct sockaddr_in *addr, int port) {
     addr->sin_family = AF_INET;
     addr->sin_addr.s_addr = htonl(INADDR_ANY);
     addr->sin_port = htons(port);
 }
 
-int findFreeClientIndex(const int *clients)
-{
-    int freeClientIndex = 0;
-    while (freeClientIndex < MAX_CLIENTS_AMOUNT && clients[freeClientIndex] >= 0)
-    {
-        freeClientIndex++;
+int find_free_client_index(const int *clients) {
+    int free_client_i = 0;
+    while (free_client_i < MAX_CLIENTS_AMOUNT && clients[free_client_i] >= 0) {
+        free_client_i++;
     }
-    return freeClientIndex;
+    return free_client_i;
 }
 
-void acceptNewClient(int listenfd, int *clients)
-{
-    int freeClientIndex = findFreeClientIndex(clients);
-    clients[freeClientIndex] = accept(listenfd, (struct sockaddr *)NULL, NULL);
+void accept_new_client(int listenfd, int *clients) {
+    int free_client_i = find_free_client_index(clients);
+    clients[free_client_i] = accept(listenfd, (struct sockaddr *)NULL, NULL);
     time_t ticks = time(NULL);
-    char sendBuff[BUFFER_SIZE + 1];
-    snprintf(sendBuff, sizeof(sendBuff), "%.24s\r\n", ctime(&ticks));
-    write(clients[freeClientIndex], sendBuff, strlen(sendBuff));
+    char send_buff[BUFFER_SIZE + 1];
+    snprintf(send_buff, sizeof(send_buff), "%.24s\r\n", ctime(&ticks));
+    write(clients[free_client_i], send_buff, strlen(send_buff));
 }
 
-int tryAcceptNewClient(int listenfd, int *clients, int alreadyConnectedClientsNumber, struct timeval *timeout, fd_set *lfds)
-{
-    if (alreadyConnectedClientsNumber < MAX_CLIENTS_AMOUNT)
-    {
-        if (select(listenfd + 1, lfds, NULL, NULL, timeout))
-        {
-            if (DEBUG)
-                printf("[DEBUG]: Can read from listen\n");
-            acceptNewClient(listenfd, clients);
-            alreadyConnectedClientsNumber++;
+int try_accept_new_client(int listenfd, int *clients, int alreadyconnected_clients, struct timeval *timeout, fd_set *lfds) {
+    if (alreadyconnected_clients < MAX_CLIENTS_AMOUNT) {
+        if (select(listenfd + 1, lfds, NULL, NULL, timeout)) {
+            printf("Can read from listen\n");
+            accept_new_client(listenfd, clients);
+            alreadyconnected_clients++;
         }
     }
-    return alreadyConnectedClientsNumber;
+    return alreadyconnected_clients;
 }
 
-void handleClientDisconnecting(int *clients, int *clientsHttpSockets, int *cacheToClient, int *sentBytes, int clientIndex)
-{
-    printf("client %d disconnecting...\n", clientIndex);
-    close(clients[clientIndex]);
-    close(clientsHttpSockets[clientIndex]);
-    clients[clientIndex] = EMPTY;
-    clientsHttpSockets[clientIndex] = EMPTY;
-    cacheToClient[clientIndex] = EMPTY;
-    sentBytes[clientIndex] = 0;
+void handle_client_disconnecting(int *clients, int *clients_http_sockets, int *cache_to_client, int *sent_bytes, int client_i) {
+    printf("client %d disconnecting...\n", client_i);
+    close(clients[client_i]);
+    close(clients_http_sockets[client_i]);
+    clients[client_i] = EMPTY;
+    clients_http_sockets[client_i] = EMPTY;
+    cache_to_client[client_i] = EMPTY;
+    sent_bytes[client_i] = 0;
 }
 
-void freeURL(url_t *pUrl)
-{
+void free_URL(url_t *pUrl) {
     free(pUrl->path);
     free(pUrl->host);
     free(pUrl);
 }
 
-url_t *parseURL(char *urlBuffer)
-{ // переписать
+url_t *parse_URL(char *url_buffer) { // переписать
     url_t *url = (url_t *)malloc(sizeof(url_t));
     url->path = NULL;
     url->host = NULL;
     url->port = 80;
-    size_t urlBufferSize = strlen(urlBuffer);
-    int startPortIndex = 0;
-    for (size_t strIndex = 0; strIndex < urlBufferSize; strIndex++)
-    {
-        if (urlBuffer[strIndex] == ':')
-        {
-            if (startPortIndex)
-            {
-                freeURL(url);
+
+    size_t url_buffer_size = strlen(url_buffer);
+
+    int start_port_i = 0;
+    for (size_t str_i = 0; str_i < url_buffer_size; str_i++) {
+        if (url_buffer[str_i] == ':') {
+            if (start_port_i != 0) {
+                free_URL(url);
                 return NULL;
             }
-            startPortIndex = strIndex;
+            start_port_i = str_i;
             char port[PORT_LEN + 1] = {0};
-            size_t portStrIndex = strIndex + 1;
-            int portIndex = 0;
-            while (portIndex < PORT_LEN && portStrIndex < urlBufferSize && isdigit(urlBuffer[portStrIndex]))
-            {
-                port[portIndex++] = urlBuffer[portStrIndex];
-                portStrIndex++;
+            size_t portstr_i = str_i + 1;
+            int port_i = 0;
+            while (port_i < PORT_LEN && portstr_i < url_buffer_size && isdigit(url_buffer[portstr_i])) {
+                port[port_i++] = url_buffer[portstr_i];
+                portstr_i++;
+                str_i++
             }
             url->port = atoi(port);
         }
-        if (urlBuffer[strIndex] == '/')
-        {
-            if (strIndex + 1 == urlBufferSize)
-            {
-                urlBuffer[strIndex] = '\0';
-                // break;
+        if (url_buffer[str_i] == '/') {
+            if (str_i + 1 == url_buffer_size) {
+                url_buffer[str_i] = '\0';
             }
-            urlBuffer[strIndex] = '\0';
-            url->host = (char *)malloc(sizeof(char) * (startPortIndex + 1));
-            url->path = (char *)malloc(sizeof(char) * (urlBufferSize - strIndex));
-            strncpy(url->host, urlBuffer, strIndex + 1);
-            strncpy(url->path, &(urlBuffer[strIndex + 1]), urlBufferSize - strIndex);
-            url->path[urlBufferSize - strIndex - 1] = 0;
+            url->host = (char *)malloc(sizeof(char) * ((start_port_i == 0 ? str_i : start_port_i) + 1));
+            url->path = (char *)malloc(sizeof(char) * (url_buffer_size - str_i));
+            strncpy(url->host, url_buffer, str_i + 1);
+            strncpy(url->path, &(url_buffer[str_i + 1]), url_buffer_size - str_i);
+            url->host[str_i] = '\0';
+            url->path[url_buffer_size - str_i - 1] = '\0';
             printf("host = %s\n", url->host);
             printf("path = %s\n", url->path);
             break;
@@ -195,32 +171,24 @@ url_t *parseURL(char *urlBuffer)
     return url;
 }
 
-void readToCache(cache_t *cache, int currentCacheSize, const int *clientsHttpSockets, int clientIndex)
-{
-
+void read_to_cache(cache_t *cache, int current_cache_size, const int *clients_http_sockets, int client_i) {
     int offset = 0;
     int read_bytes = 0;
-    while ((read_bytes = read(clientsHttpSockets[clientIndex], &cache[currentCacheSize].page[offset], BUFFER_SIZE)) != 0)
-    {
+    while ((read_bytes = read(clients_http_sockets[client_i], &cache[current_cache_size].page[offset], BUFFER_SIZE)) != 0) {
         offset += read_bytes;
-        if (DEBUG)
-            printf("[DEBUG]: cache[%d].page size = %d\n", currentCacheSize, cache[currentCacheSize].page_size);
-        if (DEBUG)
-            printf("[DEBUG]: read_bytes = %d. offset = %d\n", read_bytes, offset);
-        cache[currentCacheSize].page_size = offset;
-        cache[currentCacheSize].page = (char *)realloc(cache[currentCacheSize].page, offset + BUFFER_SIZE + 1);
+        printf("cache[%d].page size = %d\n", current_cache_size, cache[current_cache_size].page_size);
+        printf("read_bytes = %d. offset = %d\n", read_bytes, offset);
+        cache[current_cache_size].page_size = offset;
+        cache[current_cache_size].page = (char *)realloc(cache[current_cache_size].page, offset + BUFFER_SIZE + 1);
     }
 }
 
-int tryFindAtCache(const cache_t *cache, int cacheEntitiesAmount, int *cacheToClient, int *sentBytes, int clientIndex, const char *urlBuffer)
-{
+int try_find_at_cache(const cache_t *cache, int cacheEntitiesAmount, int *cache_to_client, int *sent_bytes, int client_i, const char *url_buffer) {
 
-    for (int i = 0; i < cacheEntitiesAmount; i++)
-    {
-        if (strcmp(cache[i].title, urlBuffer) == 0)
-        {
-            cacheToClient[clientIndex] = i;
-            sentBytes[clientIndex] = 0;
+    for (int i = 0; i < cacheEntitiesAmount; i++) {
+        if (strcmp(cache[i].title, url_buffer) == 0) {
+            cache_to_client[client_i] = i;
+            sent_bytes[client_i] = 0;
             printf("Page found in cache!\n");
             return 1;
         }
@@ -228,49 +196,38 @@ int tryFindAtCache(const cache_t *cache, int cacheEntitiesAmount, int *cacheToCl
     return 0;
 }
 
-char *createRequest(const url_t *url)
-{
+char *create_request(const url_t *url) {
     char *request = (char *)malloc(sizeof(char) * (ADDRESS_BUF_SIZE + 16));
     strcpy(request, "GET /");
     strcat(request, url->path);
-    strcat(request, "\r\n");
+    strcat(request, "\r\n"); // \0 
     return request;
 }
 
-void sendRequest(const int *clientsHttpSockets, int clientIndex, const url_t *url)
-{
-    if (url->path == NULL)
-    {
-        write(clientsHttpSockets[clientIndex], "GET /\r\n", strlen("GET /\r\n"));
+void send_request(const int *clients_http_sockets, int client_i, const url_t *url) {
+    if (url->path == NULL) {
+        write(clients_http_sockets[client_i], "GET /\r\n", strlen("GET /\r\n"));
     }
-    else
-    {
-        char *request = createRequest(url);
-        if (DEBUG)
-            printf("[DEBUG]: REQUEST: %s", request);
-        write(clientsHttpSockets[clientIndex], request, strlen(request));
+    else {
+        char *request = create_request(url);
+        printf("REQUEST: %s", request);
+        write(clients_http_sockets[client_i], request, strlen(request));
         free(request);
     }
 }
 
-int resendFromCache(const cache_t *cache, int connectedClientsAmount, int *clients, int *cacheToClient, int *sent_bytes, int clientIndex)
-{
+int resend_from_cache(const cache_t *cache, int connectedClientsAmount, int *clients, int *cache_to_client, int *sent_bytes, int client_i) {
     int written_bytes = 0;
-    if (cacheToClient[clientIndex] != EMPTY)
-    {
-        if (sent_bytes[clientIndex] < cache[cacheToClient[clientIndex]].page_size)
-        {
-            int bytes_left = cache[cacheToClient[clientIndex]].page_size - sent_bytes[clientIndex];
-            if ((written_bytes = write(clients[clientIndex], &(cache[cacheToClient[clientIndex]].page[sent_bytes[clientIndex]]), BUFFER_SIZE < bytes_left ? BUFFER_SIZE : bytes_left)) != 0)
-            {
-                sent_bytes[clientIndex] += written_bytes;
+    if (cache_to_client[client_i] != EMPTY) {
+        if (sent_bytes[client_i] < cache[cache_to_client[client_i]].page_size) {
+            int bytes_left = cache[cache_to_client[client_i]].page_size - sent_bytes[client_i];
+            if ((written_bytes = write(clients[client_i], &(cache[cache_to_client[client_i]].page[sent_bytes[client_i]]), BUFFER_SIZE < bytes_left ? BUFFER_SIZE : bytes_left)) != 0) {
+                sent_bytes[client_i] += written_bytes;
             }
-            else if (written_bytes == EMPTY)
-            {
-                if (DEBUG)
-                    printf("[DEBUG]: Client disconnected!\n");
-                cacheToClient[clientIndex] = EMPTY;
-                clients[clientIndex] = EMPTY;
+            else if (written_bytes == EMPTY) {
+                printf("Client disconnected!\n");
+                cache_to_client[client_i] = EMPTY;
+                clients[client_i] = EMPTY;
                 connectedClientsAmount--;
             }
         }
@@ -278,8 +235,7 @@ int resendFromCache(const cache_t *cache, int connectedClientsAmount, int *clien
     return connectedClientsAmount;
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 
     int listenfd = 0;
     struct sockaddr_in serv_addr;
@@ -289,16 +245,15 @@ int main(int argc, char *argv[])
     listenfd = socket(AF_INET, SOCK_STREAM, 0);
 
     int clients[MAX_CLIENTS_AMOUNT];
-    int clientsHttpSockets[MAX_CLIENTS_AMOUNT];
-    int cacheToClient[MAX_CLIENTS_AMOUNT];
-    int sentBytes[MAX_CLIENTS_AMOUNT];
+    int clients_http_sockets[MAX_CLIENTS_AMOUNT];
+    int cache_to_client[MAX_CLIENTS_AMOUNT];
+    int sent_bytes[MAX_CLIENTS_AMOUNT];
 
-    for (int k = 0; k < MAX_CLIENTS_AMOUNT; k++)
-    {
+    for (int k = 0; k < MAX_CLIENTS_AMOUNT; k++) {
         clients[k] = EMPTY;
-        clientsHttpSockets[k] = EMPTY;
-        cacheToClient[k] = EMPTY;
-        sentBytes[k] = EMPTY;
+        clients_http_sockets[k] = EMPTY;
+        cache_to_client[k] = EMPTY;
+        sent_bytes[k] = EMPTY;
     }
 
     // error read
@@ -316,13 +271,11 @@ int main(int argc, char *argv[])
     fd_set cfds;
     fd_set sfds;
 
-    if (DEBUG)
-        printf("[DEBUG]: listenfd = %d\n", listenfd);
+    printf("listenfd = %d\n", listenfd);
 
-    int connectedClientsNumber = 0;
-    int cacheSize = 0;
-    while (1)
-    {
+    int connected_clients = 0;
+    int cache_size = 0;
+    while (1) {
         FD_ZERO(&lfds);
         FD_SET(listenfd, &lfds);
 
@@ -332,86 +285,73 @@ int main(int argc, char *argv[])
             break;
         }
 
-        connectedClientsNumber = tryAcceptNewClient(listenfd, clients, connectedClientsNumber, &timeout, &lfds);
+        connected_clients = try_accept_new_client(listenfd, clients, connected_clients, &timeout, &lfds);
 
-        for (int clientIndex = 0; clientIndex < MAX_CLIENTS_AMOUNT; clientIndex++)
-        {
+        for (int client_i = 0; client_i < MAX_CLIENTS_AMOUNT; client_i++) {
 
-            if (clients[clientIndex] < 2)
+            if (clients[client_i] < 2)
                 continue;
 
             FD_ZERO(&cfds);
-            FD_SET(clients[clientIndex], &cfds);
+            FD_SET(clients[client_i], &cfds);
 
-            if (select(clients[clientIndex] + 1, &cfds, NULL, NULL, &timeout))
-            {
-                char urlBuffer[ADDRESS_BUF_SIZE];
-                int read_bytes = read(clients[clientIndex], &urlBuffer, ADDRESS_BUF_SIZE);
-                if (read_bytes)
-                {
-                    urlBuffer[read_bytes] = '\0';
-                    printf("\"%s\"\n", urlBuffer);
-                    if (strcmp(urlBuffer, "/exit") == 0)
-                    {
-                        connectedClientsNumber--;
-                        handleClientDisconnecting(clients, clientsHttpSockets, cacheToClient, sentBytes, clientIndex);
+            if (select(clients[client_i] + 1, &cfds, NULL, NULL, &timeout)) {
+                char url_buffer[ADDRESS_BUF_SIZE];
+                int read_bytes = read(clients[client_i], &url_buffer, ADDRESS_BUF_SIZE);
+                if (read_bytes) {
+                    url_buffer[read_bytes] = '\0';
+                    printf("\"%s\"\n", url_buffer);
+                    if (strcmp(url_buffer, "/exit") == 0) {
+                        connected_clients--;
+                        handle_client_disconnecting(clients, clients_http_sockets, cache_to_client, sent_bytes, client_i);
                         continue;
                     }
-                    url_t *url = parseURL(urlBuffer);
-                    if (url == NULL)
-                    {
-                        if (DEBUG)
-                            printf("[DEBUG]: URL parsing fail\n");
+                    url_t *url = parse_URL(url_buffer);
+                    if (url == NULL) {
+                        rintf("URL parsing fail\n");
                         continue;
                     }
-                    if (DEBUG)
-                        printf("[DEBUG]: Connecting socket...\n");
+                    printf("Connecting socket...\n");
                     printf("PORT=%d\n", url->port);
-                    printf("clientIndex = %d, MAX_CLIENTS_AMOUNT = %d\n", clientIndex, MAX_CLIENTS_AMOUNT);
+                    printf("client_i = %d, MAX_CLIENTS_AMOUNT = %d\n", client_i, MAX_CLIENTS_AMOUNT);
 
-                    int findAtCache = tryFindAtCache(cache, cacheSize, cacheToClient, sentBytes, clientIndex, urlBuffer);
+                    int find_at_cache = try_find_at_cache(cache, cache_size, cache_to_client, sent_bytes, client_i, url_buffer);
 
-                    if (!findAtCache)
-                    {
-                        clientsHttpSockets[clientIndex] = socketConnect(url->host, url->port);
+                    if (!find_at_cache) {
+                        clients_http_sockets[client_i] = socket_connect(url->host, url->port);
 
-                        if (clientsHttpSockets[clientIndex] == EMPTY)
-                        {
-                            write(clients[clientIndex], "Failed connect!\n", strlen("Failed connect!\n"));
+                        if (clients_http_sockets[client_i] == EMPTY) {
+                            write(clients[client_i], "Failed connect!\n", strlen("Failed connect!\n"));
                             continue;
                         }
+                        printf("Socket connected.\n");
 
-                        if (DEBUG)
-                            printf("[DEBUG]: Socket connected.\n");
+                        send_request(clients_http_sockets, client_i, url);
 
-                        sendRequest(clientsHttpSockets, clientIndex, url);
+                        cache[cache_size].title = (char *)malloc(sizeof(char) * strlen(url_buffer));
+                        strcpy(cache[cache_size].title, url_buffer);
 
-                        cache[cacheSize].title = (char *)malloc(sizeof(char) * strlen(urlBuffer));
-                        strcpy(cache[cacheSize].title, urlBuffer);
+                        cache[cache_size].page_size = BUFFER_SIZE;
+                        cache[cache_size].page = (char *)malloc(BUFFER_SIZE + 1);
 
-                        cache[cacheSize].page_size = BUFFER_SIZE;
-                        cache[cacheSize].page = (char *)malloc(BUFFER_SIZE + 1);
+                        cache_to_client[client_i] = cache_size;
+                        sent_bytes[client_i] = 0;
 
-                        cacheToClient[clientIndex] = cacheSize;
-                        sentBytes[clientIndex] = 0;
+                        printf("reading...\n");
 
-                        if (DEBUG)
-                            printf("[DEBUG]: reading...\n");
+                        read_to_cache(cache, cache_size, clients_http_sockets, client_i);
 
-                        readToCache(cache, cacheSize, clientsHttpSockets, clientIndex);
+                        close(clients_http_sockets[client_i]);
 
-                        close(clientsHttpSockets[clientIndex]);
-
-                        cache[cacheSize].page[cache[cacheSize].page_size + 1] = '\0';
-                        cacheSize++;
-                        if (DEBUG)
-                            printf("[DEBUG]: cache read!\n");
+                        cache[cache_size].page[cache[cache_size].page_size + 1] = '\0';
+                        cache_size++;
+                        printf("cache read!\n");
                     }
 
-                    freeURL(url);
+                    free_URL(url);
                 }
             }
-            connectedClientsNumber = resendFromCache(cache, connectedClientsNumber, clients, cacheToClient, sentBytes, clientIndex);
+            connected_clients = resend_from_cache(cache, connected_clients, clients, cache_to_client, sent_bytes, client_i);
         }
     }
 }
