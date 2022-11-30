@@ -317,8 +317,9 @@ int main(int argc, char *argv[]) {
 
             FD_ZERO(&cfds);
             FD_SET(clients[clientIndex], &cfds);
-
+            printf("!\n");
             if(clientsHttpSockets[clientIndex] == EMPTY || select(clients[clientIndex] + 1, &cfds, NULL, NULL, &timeout)) {
+                printf("!!\n");
                 char urlBuffer[ADDRESS_BUF_SIZE];
                 int read_bytes = read(clients[clientIndex], &urlBuffer, ADDRESS_BUF_SIZE);
                 if(read_bytes) {
@@ -377,6 +378,7 @@ int main(int argc, char *argv[]) {
                     freeURL(url);
                 }
             }
+            printf("!!!\n");
             connectedClientsNumber = resendFromCache(cache, connectedClientsNumber, clients, cacheToClient, sentBytes, clientIndex);
         }
     }
