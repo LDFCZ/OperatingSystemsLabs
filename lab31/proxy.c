@@ -300,7 +300,7 @@ int main(int argc, char *argv[]) {
                 size_t len = 200;
                 char* url_buffer = (char *)malloc(sizeof(char) * len);
                 //int read_bytes = read(clients[client_i], &url_buffer, ADDRESS_BUF_SIZE);
-                int read_bytes = getline(&url_buffer, &len, clients[client_i]);
+                int read_bytes = getline(&url_buffer, &len, fdopen(clients[client_i], "r"));
                 //url_buffer[strlen(url_buffer) - 1] = '\0';
                 if (read_bytes) {
                     url_buffer[read_bytes] = '\0';
