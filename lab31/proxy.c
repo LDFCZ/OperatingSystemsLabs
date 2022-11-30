@@ -157,9 +157,9 @@ url_t *parse_URL(char *url_buffer) {
             if (str_i + 1 == url_buffer_size) {
                 url_buffer[str_i] = '\0';
             }
-            url->host = (char *)malloc(sizeof(char) * ((start_port_i == 0 ? str_i : start_port_i) + 1));
+            url->host = (char *)malloc(sizeof(char) * (start_port_i == 0 ? str_i + 1 : start_port_i));
             url->path = (char *)malloc(sizeof(char) * (url_buffer_size - str_i));
-            strncpy(url->host, url_buffer, (start_port_i == 0 ? str_i : start_port_i) + 1);
+            strncpy(url->host, url_buffer, start_port_i == 0 ? str_i + 1: start_port_i);
             strncpy(url->path, &(url_buffer[str_i + 1]), url_buffer_size - str_i);
             url->host[str_i] = '\0';
             url->path[url_buffer_size - str_i - 1] = '\0';
