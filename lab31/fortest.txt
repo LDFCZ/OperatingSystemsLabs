@@ -2,7 +2,6 @@ soothinggoodlushstars.neverssl.com/online/
 parallels.nsu.ru/WackoWiki/KursOperacionnyeSistemy/PraktikumPosixThreads/PthreadTasks
 www.softwareqatest.com/qatweb1.html
 fit.ippolitov.me/CN_2/2021/list.html
-
 fit.ippolitov.me/CN_2/2020/list.html
 
 192.168.1.124:8181/swagger-ui/index.html
