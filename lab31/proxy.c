@@ -127,7 +127,7 @@ void free_URL(url_t *pUrl) {
     free(pUrl);
 }
 
-url_t *parse_URL(char *url_buffer) { // переписать
+url_t *parse_URL(char *url_buffer) {
     url_t *url = (url_t *)malloc(sizeof(url_t));
     url->path = NULL;
     url->host = NULL;
@@ -159,7 +159,7 @@ url_t *parse_URL(char *url_buffer) { // переписать
             }
             url->host = (char *)malloc(sizeof(char) * ((start_port_i == 0 ? str_i : start_port_i) + 1));
             url->path = (char *)malloc(sizeof(char) * (url_buffer_size - str_i));
-            strncpy(url->host, url_buffer, str_i + 1);
+            strncpy(url->host, url_buffer, (start_port_i == 0 ? str_i : start_port_i) + 1);
             strncpy(url->path, &(url_buffer[str_i + 1]), url_buffer_size - str_i);
             url->host[str_i] = '\0';
             url->path[url_buffer_size - str_i - 1] = '\0';
