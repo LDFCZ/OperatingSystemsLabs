@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="lab31proxy"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lab31proxy">
+				<Option output="C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/lab31proxy.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 lab31proxy"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lab31proxy/fast">
+				<Option output="C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/lab31proxy.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 lab31proxy/fast"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/loopa/work/test/osi/lab31proxy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/Constants.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/binaryString/BinaryString.cpp">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/binaryString/BinaryString.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/buffer/Buffer.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/buffer/BufferImpl.cpp">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/buffer/BufferImpl.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/cash/Cash.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/cash/CashElement.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/cash/CashElementImpl.cpp">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/cash/CashElementImpl.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/cash/CashImpl.cpp">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/cash/CashImpl.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/client/Client.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/client/ClientImpl.cpp">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/client/ClientImpl.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/logger/Logger.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/main.cpp">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/parser/ParseException.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/parser/ParserImpl.cpp">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/parser/ParserImpl.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/parser/ParserTypeRequest.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/parser/ResultParseHeading.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/server/Server.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/server/ServerImpl.cpp">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/server/ServerImpl.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/socket/ConnectException.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/socket/ServerSocket.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/socket/ServerSocketImpl.cpp">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/socket/ServerSocketImpl.h">
+			<Option target="lab31proxy"/>
+		</Unit>
+		<Unit filename="C:/Users/loopa/work/test/osi/lab31proxy/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
