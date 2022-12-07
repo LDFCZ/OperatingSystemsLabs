@@ -42,7 +42,7 @@ int main() {
     if (cancel_err != CORRECT_CODE) {
         fprintf(stderr, "Thread canceling error %d: %s\n", cancel_err, strerror(cancel_err));
     }
-    printf("\nThread canceled\n");
+    printf("\nCancel thread\n");
 
     void *thread_return_value;
     int join_err = pthread_join(thread, &thread_return_value);
