@@ -44,9 +44,14 @@ int main() {
     }
     printf("\nThread canceled\n");
 
-    int join_err = pthread_join(thread, NULL);
+    void *thread_return_value;
+    int join_err = pthread_join(thread, &thread_return_value);
     if (join_err != CORRECT_CODE) {
         fprintf(stderr, "Thread joining error %d: %s\n", join_err, strerror(join_err));
+    }
+
+    if (thread_return_value == PTHREAD_CANCELED) {
+	    printf("Thread was canceled!\n");
     }
     
     return CORRECT_EXIT_CODE;
