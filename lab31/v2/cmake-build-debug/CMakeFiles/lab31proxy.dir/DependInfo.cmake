@@ -8,15 +8,15 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/loopa/work/test/osi/lab31proxy/binaryString/BinaryString.cpp" "CMakeFiles/lab31proxy.dir/binaryString/BinaryString.cpp.obj" "gcc" "CMakeFiles/lab31proxy.dir/binaryString/BinaryString.cpp.obj.d"
-  "C:/Users/loopa/work/test/osi/lab31proxy/buffer/BufferImpl.cpp" "CMakeFiles/lab31proxy.dir/buffer/BufferImpl.cpp.obj" "gcc" "CMakeFiles/lab31proxy.dir/buffer/BufferImpl.cpp.obj.d"
-  "C:/Users/loopa/work/test/osi/lab31proxy/cash/CashElementImpl.cpp" "CMakeFiles/lab31proxy.dir/cash/CashElementImpl.cpp.obj" "gcc" "CMakeFiles/lab31proxy.dir/cash/CashElementImpl.cpp.obj.d"
-  "C:/Users/loopa/work/test/osi/lab31proxy/cash/CashImpl.cpp" "CMakeFiles/lab31proxy.dir/cash/CashImpl.cpp.obj" "gcc" "CMakeFiles/lab31proxy.dir/cash/CashImpl.cpp.obj.d"
-  "C:/Users/loopa/work/test/osi/lab31proxy/client/ClientImpl.cpp" "CMakeFiles/lab31proxy.dir/client/ClientImpl.cpp.obj" "gcc" "CMakeFiles/lab31proxy.dir/client/ClientImpl.cpp.obj.d"
-  "C:/Users/loopa/work/test/osi/lab31proxy/main.cpp" "CMakeFiles/lab31proxy.dir/main.cpp.obj" "gcc" "CMakeFiles/lab31proxy.dir/main.cpp.obj.d"
-  "C:/Users/loopa/work/test/osi/lab31proxy/parser/ParserImpl.cpp" "CMakeFiles/lab31proxy.dir/parser/ParserImpl.cpp.obj" "gcc" "CMakeFiles/lab31proxy.dir/parser/ParserImpl.cpp.obj.d"
-  "C:/Users/loopa/work/test/osi/lab31proxy/server/ServerImpl.cpp" "CMakeFiles/lab31proxy.dir/server/ServerImpl.cpp.obj" "gcc" "CMakeFiles/lab31proxy.dir/server/ServerImpl.cpp.obj.d"
-  "C:/Users/loopa/work/test/osi/lab31proxy/socket/ServerSocketImpl.cpp" "CMakeFiles/lab31proxy.dir/socket/ServerSocketImpl.cpp.obj" "gcc" "CMakeFiles/lab31proxy.dir/socket/ServerSocketImpl.cpp.obj.d"
+  "/home/ldfcz/OperatingSystemsLabs/lab31/v2/binaryString/BinaryString.cpp" "CMakeFiles/lab31proxy.dir/binaryString/BinaryString.cpp.o" "gcc" "CMakeFiles/lab31proxy.dir/binaryString/BinaryString.cpp.o.d"
+  "/home/ldfcz/OperatingSystemsLabs/lab31/v2/buffer/BufferImpl.cpp" "CMakeFiles/lab31proxy.dir/buffer/BufferImpl.cpp.o" "gcc" "CMakeFiles/lab31proxy.dir/buffer/BufferImpl.cpp.o.d"
+  "/home/ldfcz/OperatingSystemsLabs/lab31/v2/cash/CashElementImpl.cpp" "CMakeFiles/lab31proxy.dir/cash/CashElementImpl.cpp.o" "gcc" "CMakeFiles/lab31proxy.dir/cash/CashElementImpl.cpp.o.d"
+  "/home/ldfcz/OperatingSystemsLabs/lab31/v2/cash/CashImpl.cpp" "CMakeFiles/lab31proxy.dir/cash/CashImpl.cpp.o" "gcc" "CMakeFiles/lab31proxy.dir/cash/CashImpl.cpp.o.d"
+  "/home/ldfcz/OperatingSystemsLabs/lab31/v2/client/ClientImpl.cpp" "CMakeFiles/lab31proxy.dir/client/ClientImpl.cpp.o" "gcc" "CMakeFiles/lab31proxy.dir/client/ClientImpl.cpp.o.d"
+  "/home/ldfcz/OperatingSystemsLabs/lab31/v2/main.cpp" "CMakeFiles/lab31proxy.dir/main.cpp.o" "gcc" "CMakeFiles/lab31proxy.dir/main.cpp.o.d"
+  "/home/ldfcz/OperatingSystemsLabs/lab31/v2/parser/ParserImpl.cpp" "CMakeFiles/lab31proxy.dir/parser/ParserImpl.cpp.o" "gcc" "CMakeFiles/lab31proxy.dir/parser/ParserImpl.cpp.o.d"
+  "/home/ldfcz/OperatingSystemsLabs/lab31/v2/server/ServerImpl.cpp" "CMakeFiles/lab31proxy.dir/server/ServerImpl.cpp.o" "gcc" "CMakeFiles/lab31proxy.dir/server/ServerImpl.cpp.o.d"
+  "/home/ldfcz/OperatingSystemsLabs/lab31/v2/socket/ServerSocketImpl.cpp" "CMakeFiles/lab31proxy.dir/socket/ServerSocketImpl.cpp.o" "gcc" "CMakeFiles/lab31proxy.dir/socket/ServerSocketImpl.cpp.o.d"
   )
 
 # Targets to which this target links.

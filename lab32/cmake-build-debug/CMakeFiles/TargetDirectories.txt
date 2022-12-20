@@ -1,0 +1,3 @@
+/home/ldfcz/OperatingSystemsLabs/lab32/cmake-build-debug/CMakeFiles/lab32.dir
+/home/ldfcz/OperatingSystemsLabs/lab32/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ldfcz/OperatingSystemsLabs/lab32/cmake-build-debug/CMakeFiles/rebuild_cache.dir

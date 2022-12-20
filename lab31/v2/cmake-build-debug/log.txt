@@ -1,0 +1,613 @@
+time: 15:24:47   event --->    start program
+time: 15:24:47   event --->    update pollSet
+time: 15:26:8   event --->    accept new client
+time: 15:26:8   event --->    update pollSet
+time: 15:26:8   event --->    add new client
+time: 15:26:8   event --->    http server connect
+time: 15:26:8   event --->    update pollSet
+time: 15:26:8   event --->    add to cash
+time: 15:26:8   event --->    http server logout
+time: 15:26:8   event --->    destructor client
+time: 15:26:8   event --->    user logout
+time: 15:26:8   event --->    delete buffer
+time: 15:26:8   event --->    destructor client
+time: 15:26:8   event --->    update pollSet
+time: 15:26:8   event --->    accept new client
+time: 15:26:8   event --->    update pollSet
+time: 15:26:8   event --->    add new client
+time: 15:26:8   event --->    http server connect
+time: 15:26:8   event --->    update pollSet
+time: 15:26:8   event --->    accept new client
+time: 15:26:8   event --->    update pollSet
+time: 15:26:8   event --->    add new client
+time: 15:26:8   event --->    http server connect
+time: 15:26:8   event --->    update pollSet
+time: 15:26:8   event --->    add to cash
+time: 15:26:8   event --->    http server logout
+time: 15:26:8   event --->    destructor client
+time: 15:26:8   event --->    update pollSet
+time: 15:26:8   event --->    user logout
+time: 15:26:8   event --->    delete buffer
+time: 15:26:8   event --->    destructor client
+time: 15:26:8   event --->    update pollSet
+time: 15:26:8   event --->    add to cash
+time: 15:26:8   event --->    http server logout
+time: 15:26:8   event --->    destructor client
+time: 15:26:8   event --->    user logout
+time: 15:26:8   event --->    delete buffer
+time: 15:26:8   event --->    destructor client
+time: 15:26:8   event --->    update pollSet
+time: 15:26:55   event --->    accept new client
+time: 15:26:55   event --->    update pollSet
+time: 15:26:55   event --->    add new client
+time: 15:26:55   event --->    http server connect
+time: 15:26:55   event --->    update pollSet
+time: 15:26:55   event --->    http server logout
+time: 15:26:55   event --->    destructor client
+time: 15:26:55   event --->    user logout
+time: 15:26:55   event --->    delete buffer
+time: 15:26:55   event --->    destructor client
+time: 15:26:55   event --->    update pollSet
+time: 15:26:55   event --->    accept new client
+time: 15:26:55   event --->    update pollSet
+time: 15:26:55   event --->    add new client
+time: 15:26:55   event --->    http server connect
+time: 15:26:55   event --->    update pollSet
+time: 15:26:55   event --->    accept new client
+time: 15:26:55   event --->    update pollSet
+time: 15:26:55   event --->    add new client
+time: 15:26:55   event --->    http server connect
+time: 15:26:55   event --->    update pollSet
+time: 15:26:56   event --->    end body response read
+time: 15:26:56   event --->    http server logout
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    user logout
+time: 15:26:56   event --->    delete buffer
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    accept new client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    add new client
+time: 15:26:56   event --->    http server connect
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    accept new client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    add new client
+time: 15:26:56   event --->    http server connect
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    accept new client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    add new client
+time: 15:26:56   event --->    http server connect
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    end body response read
+time: 15:26:56   event --->    add to cash
+time: 15:26:56   event --->    accept new client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    add new client
+time: 15:26:56   event --->    http server logout
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    http server connect
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    http server logout
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    user logout
+time: 15:26:56   event --->    delete buffer
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    http server logout
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    user logout
+time: 15:26:56   event --->    delete buffer
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    user logout
+time: 15:26:56   event --->    delete buffer
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    accept new client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    add new client
+time: 15:26:56   event --->    http server connect
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    accept new client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    add new client
+time: 15:26:56   event --->    http server logout
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    http server connect
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    http server logout
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    user logout
+time: 15:26:56   event --->    delete buffer
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    http server logout
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    user logout
+time: 15:26:56   event --->    delete buffer
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    user logout
+time: 15:26:56   event --->    delete buffer
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    accept new client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    add new client
+time: 15:26:56   event --->    http server connect
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    accept new client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    add new client
+time: 15:26:56   event --->    http server connect
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    accept new client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    add new client
+time: 15:26:56   event --->    http server logout
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    http server connect
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    http server logout
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    user logout
+time: 15:26:56   event --->    delete buffer
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    user logout
+time: 15:26:56   event --->    delete buffer
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    http server logout
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    user logout
+time: 15:26:56   event --->    delete buffer
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:56   event --->    end body response read
+time: 15:26:56   event --->    http server logout
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    user logout
+time: 15:26:56   event --->    delete buffer
+time: 15:26:56   event --->    destructor client
+time: 15:26:56   event --->    update pollSet
+time: 15:26:57   event --->    accept new client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add new client
+time: 15:26:57   event --->    accept new client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add new client
+time: 15:26:57   event --->    accept new client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add new client
+time: 15:26:57   event --->    accept new client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add new client
+time: 15:26:57   event --->    accept new client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add new client
+time: 15:26:57   event --->    http server connect
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    http server connect
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    http server logout
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    user logout
+time: 15:26:57   event --->    delete buffer
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    http server connect
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    http server connect
+time: 15:26:57   event --->    http server connect
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    http server logout
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    user logout
+time: 15:26:57   event --->    delete buffer
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    accept new client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add new client
+time: 15:26:57   event --->    http server connect
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add to cash
+time: 15:26:57   event --->    add to cash
+time: 15:26:57   event --->    accept new client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add new client
+time: 15:26:57   event --->    http server connect
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add to cash
+time: 15:26:57   event --->    accept new client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add new client
+time: 15:26:57   event --->    http server connect
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    end body response read
+time: 15:26:57   event --->    end body response read
+time: 15:26:57   event --->    end body response read
+time: 15:26:57   event --->    add to cash
+time: 15:26:57   event --->    accept new client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add new client
+time: 15:26:57   event --->    http server logout
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    http server logout
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    http server logout
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    http server connect
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    http server logout
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    end body response read
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    user logout
+time: 15:26:57   event --->    delete buffer
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    user logout
+time: 15:26:57   event --->    delete buffer
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    user logout
+time: 15:26:57   event --->    delete buffer
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    user logout
+time: 15:26:57   event --->    delete buffer
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    http server logout
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    http server logout
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    user logout
+time: 15:26:57   event --->    delete buffer
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    user logout
+time: 15:26:57   event --->    delete buffer
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    accept new client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add new client
+time: 15:26:57   event --->    http server connect
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    user logout
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    http server logout
+time: 15:26:57   event --->    delete buffer
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    accept new client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add new client
+time: 15:26:57   event --->    http server connect
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add to cash
+time: 15:26:57   event --->    accept new client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add new client
+time: 15:26:57   event --->    http server connect
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    end body response read
+time: 15:26:57   event --->    add to cash
+time: 15:26:57   event --->    http server logout
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    user logout
+time: 15:26:57   event --->    delete buffer
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    add to cash
+time: 15:26:57   event --->    end body response read
+time: 15:26:57   event --->    http server logout
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:57   event --->    user logout
+time: 15:26:57   event --->    delete buffer
+time: 15:26:57   event --->    destructor client
+time: 15:26:57   event --->    update pollSet
+time: 15:26:58   event --->    end body response read
+time: 15:26:58   event --->    http server logout
+time: 15:26:58   event --->    destructor client
+time: 15:26:58   event --->    user logout
+time: 15:26:58   event --->    delete buffer
+time: 15:26:58   event --->    destructor client
+time: 15:26:58   event --->    update pollSet
+time: 15:26:58   event --->    accept new client
+time: 15:26:58   event --->    update pollSet
+time: 15:26:58   event --->    add new client
+time: 15:26:58   event --->    http server connect
+time: 15:26:58   event --->    update pollSet
+time: 15:26:58   event --->    accept new client
+time: 15:26:58   event --->    update pollSet
+time: 15:26:58   event --->    add new client
+time: 15:26:58   event --->    http server connect
+time: 15:26:58   event --->    update pollSet
+time: 15:26:58   event --->    add to cash
+time: 15:26:58   event --->    http server logout
+time: 15:26:58   event --->    destructor client
+time: 15:26:58   event --->    update pollSet
+time: 15:26:58   event --->    user logout
+time: 15:26:58   event --->    delete buffer
+time: 15:26:58   event --->    destructor client
+time: 15:26:58   event --->    update pollSet
+time: 15:26:58   event --->    add to cash
+time: 15:26:58   event --->    end body response read
+time: 15:26:58   event --->    http server logout
+time: 15:26:58   event --->    destructor client
+time: 15:26:58   event --->    user logout
+time: 15:26:58   event --->    delete buffer
+time: 15:26:58   event --->    destructor client
+time: 15:26:58   event --->    update pollSet
+time: 15:26:58   event --->    accept new client
+time: 15:26:58   event --->    update pollSet
+time: 15:26:58   event --->    add new client
+time: 15:26:58   event --->    http server connect
+time: 15:26:58   event --->    update pollSet
+time: 15:26:58   event --->    http server logout
+time: 15:26:58   event --->    destructor client
+time: 15:26:58   event --->    user logout
+time: 15:26:58   event --->    delete buffer
+time: 15:26:58   event --->    destructor client
+time: 15:26:58   event --->    update pollSet
+time: 15:27:3   event --->    accept new client
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    add new client
+time: 15:27:3   event --->    http server connect
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    end body response read
+time: 15:27:3   event --->    http server logout
+time: 15:27:3   event --->    destructor client
+time: 15:27:3   event --->    user logout
+time: 15:27:3   event --->    delete buffer
+time: 15:27:3   event --->    destructor client
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    accept new client
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    add new client
+time: 15:27:3   event --->    http server connect
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    accept new client
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    add new client
+time: 15:27:3   event --->    http server connect
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    accept new client
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    add new client
+time: 15:27:3   event --->    http server connect
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    http server logout
+time: 15:27:3   event --->    destructor client
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    user logout
+time: 15:27:3   event --->    delete buffer
+time: 15:27:3   event --->    destructor client
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    http server logout
+time: 15:27:3   event --->    destructor client
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    user logout
+time: 15:27:3   event --->    delete buffer
+time: 15:27:3   event --->    destructor client
+time: 15:27:3   event --->    update pollSet
+time: 15:27:3   event --->    http server logout
+time: 15:27:3   event --->    destructor client
+time: 15:27:3   event --->    user logout
+time: 15:27:3   event --->    delete buffer
+time: 15:27:3   event --->    destructor client
+time: 15:27:3   event --->    update pollSet
+time: 15:27:10   event --->    accept new client
+time: 15:27:10   event --->    update pollSet
+time: 15:27:10   event --->    add new client
+time: 15:27:10   event --->    http server connect
+time: 15:27:10   event --->    update pollSet
+time: 15:27:10   event --->    http server logout
+time: 15:27:10   event --->    destructor client
+time: 15:27:10   event --->    user logout
+time: 15:27:10   event --->    delete buffer
+time: 15:27:10   event --->    destructor client
+time: 15:27:10   event --->    update pollSet
+time: 15:27:11   event --->    accept new client
+time: 15:27:11   event --->    update pollSet
+time: 15:27:11   event --->    add new client
+time: 15:27:11   event --->    http server connect
+time: 15:27:11   event --->    update pollSet
+time: 15:27:11   event --->    end body response read
+time: 15:27:11   event --->    http server logout
+time: 15:27:11   event --->    destructor client
+time: 15:27:11   event --->    user logout
+time: 15:27:11   event --->    delete buffer
+time: 15:27:11   event --->    destructor client
+time: 15:27:11   event --->    update pollSet
+time: 15:27:11   event --->    accept new client
+time: 15:27:11   event --->    update pollSet
+time: 15:27:11   event --->    add new client
+time: 15:27:12   event --->    http server connect
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    accept new client
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    add new client
+time: 15:27:12   event --->    http server connect
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    accept new client
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    add new client
+time: 15:27:12   event --->    http server logout
+time: 15:27:12   event --->    destructor client
+time: 15:27:12   event --->    http server connect
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    accept new client
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    add new client
+time: 15:27:12   event --->    user logout
+time: 15:27:12   event --->    delete buffer
+time: 15:27:12   event --->    destructor client
+time: 15:27:12   event --->    http server connect
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    http server logout
+time: 15:27:12   event --->    destructor client
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    user logout
+time: 15:27:12   event --->    delete buffer
+time: 15:27:12   event --->    destructor client
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    http server logout
+time: 15:27:12   event --->    destructor client
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    user logout
+time: 15:27:12   event --->    delete buffer
+time: 15:27:12   event --->    destructor client
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    accept new client
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    add new client
+time: 15:27:12   event --->    http server connect
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    accept new client
+time: 15:27:12   event --->    update pollSet
+time: 15:27:12   event --->    add new client
+time: 15:27:12   event --->    http server logout
+time: 15:27:12   event --->    destructor client
+time: 15:27:13   event --->    http server connect
+time: 15:27:13   event --->    update pollSet
+time: 15:27:13   event --->    add to cash
+time: 15:27:13   event --->    accept new client
+time: 15:27:13   event --->    update pollSet
+time: 15:27:13   event --->    add new client
+time: 15:27:13   event --->    user logout
+time: 15:27:13   event --->    delete buffer
+time: 15:27:13   event --->    destructor client
+time: 15:27:13   event --->    update pollSet
+time: 15:27:13   event --->    accept new client
+time: 15:27:13   event --->    update pollSet
+time: 15:27:13   event --->    add new client
+time: 15:27:13   event --->    http server connect
+time: 15:27:13   event --->    update pollSet
+time: 15:27:13   event --->    add to cash
+time: 15:27:13   event --->    accept new client
+time: 15:27:13   event --->    update pollSet
+time: 15:27:13   event --->    add new client
+time: 15:27:13   event --->    end body response read
+time: 15:27:13   event --->    http server logout
+time: 15:27:13   event --->    destructor client
+time: 15:27:13   event --->    add to cash
+time: 15:27:13   event --->    update pollSet
+time: 15:27:13   event --->    user logout
+time: 15:27:13   event --->    delete buffer
+time: 15:27:13   event --->    destructor client
+time: 15:27:13   event --->    update pollSet
+time: 15:27:13   event --->    end body response read
+time: 15:27:13   event --->    http server logout
+time: 15:27:13   event --->    destructor client
+time: 15:27:13   event --->    end body response read
+time: 15:27:13   event --->    update pollSet
+time: 15:27:13   event --->    user logout
+time: 15:27:13   event --->    delete buffer
+time: 15:27:13   event --->    destructor client
+time: 15:27:13   event --->    http server logout
+time: 15:27:13   event --->    destructor client
+time: 15:27:13   event --->    update pollSet
+time: 15:27:13   event --->    user logout
+time: 15:27:13   event --->    delete buffer
+time: 15:27:13   event --->    destructor client
+time: 15:27:13   event --->    update pollSet
+time: 15:27:18   event --->    user logout
+time: 15:27:18   event --->    delete buffer
+time: 15:27:18   event --->    destructor client
+time: 15:27:18   event --->    update pollSet
+time: 15:27:18   event --->    user logout
+time: 15:27:18   event --->    delete buffer
+time: 15:27:18   event --->    destructor client
+time: 15:27:18   event --->    update pollSet
+time: 15:27:38   event --->    accept new client
+time: 15:27:38   event --->    update pollSet
+time: 15:27:38   event --->    add new client
+time: 15:27:38   event --->    http server connect
+time: 15:27:38   event --->    update pollSet
+time: 15:27:38   event --->    end body response read
+time: 15:27:38   event --->    http server logout
+time: 15:27:38   event --->    destructor client
+time: 15:27:38   event --->    user logout
+time: 15:27:38   event --->    delete buffer
+time: 15:27:38   event --->    destructor client
+time: 15:27:38   event --->    update pollSet
+time: 15:27:39   event --->    accept new client
+time: 15:27:39   event --->    update pollSet
+time: 15:27:39   event --->    add new client
+time: 15:27:39   event --->    http server connect
+time: 15:27:39   event --->    update pollSet
+time: 15:27:39   event --->    end body response read
+time: 15:27:39   event --->    http server logout
+time: 15:27:39   event --->    destructor client
+time: 15:27:39   event --->    user logout
+time: 15:27:39   event --->    delete buffer
+time: 15:27:39   event --->    destructor client
+time: 15:27:39   event --->    update pollSet
+time: 15:27:49   event --->    accept new client
+time: 15:27:49   event --->    update pollSet
+time: 15:27:49   event --->    add new client
+time: 15:27:49   event --->    http server connect
+time: 15:27:49   event --->    update pollSet
+time: 15:27:49   event --->    http server logout
+time: 15:27:49   event --->    destructor client
+time: 15:27:49   event --->    user logout
+time: 15:27:49   event --->    delete buffer
+time: 15:27:49   event --->    destructor client
+time: 15:27:49   event --->    update pollSet
+time: 15:28:9   event --->    accept new client
+time: 15:28:9   event --->    update pollSet
+time: 15:28:9   event --->    add new client
+time: 15:28:9   event --->    http server connect
+time: 15:28:9   event --->    update pollSet
+time: 15:28:9   event --->    end body response read
+time: 15:28:9   event --->    http server logout
+time: 15:28:9   event --->    destructor client
+time: 15:28:9   event --->    user logout
+time: 15:28:9   event --->    delete buffer
+time: 15:28:9   event --->    destructor client
+time: 15:28:9   event --->    update pollSet
+time: 15:28:9   event --->    accept new client
+time: 15:28:9   event --->    update pollSet
+time: 15:28:9   event --->    add new client
+time: 15:28:10   event --->    http server connect
+time: 15:28:10   event --->    update pollSet
+time: 15:28:10   event --->    accept new client
+time: 15:28:10   event --->    update pollSet
+time: 15:28:10   event --->    add new client
+time: 15:28:10   event --->    http server connect
+time: 15:28:10   event --->    update pollSet
+time: 15:28:10   event --->    accept new client
+time: 15:28:10   event --->    update pollSet
+time: 15:28:10   event --->    add new client
+time: 15:28:10   event --->    http server logout
+time: 15:28:10   event --->    destructor client
+time: 15:28:10   event --->    update pollSet
+time: 15:28:10   event --->    user logout
+time: 15:28:10   event --->    delete buffer
+time: 15:28:10   event --->    destructor client
+time: 15:28:10   event --->    update pollSet
+time: 15:28:10   event --->    http server logout
+time: 15:28:10   event --->    destructor client
+time: 15:28:10   event --->    update pollSet
+time: 15:28:10   event --->    user logout
+time: 15:28:10   event --->    delete buffer
+time: 15:28:10   event --->    destructor client
+time: 15:28:10   event --->    update pollSet
+time: 15:28:15   event --->    user logout
+time: 15:28:15   event --->    delete buffer
+time: 15:28:15   event --->    destructor client
+time: 15:28:15   event --->    update pollSet

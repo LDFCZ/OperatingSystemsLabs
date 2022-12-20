@@ -1,0 +1,307 @@
+time: 17:40:34   event --->    start program
+time: 17:40:34   event --->    server starts
+time: 17:40:34   event --->    new thread starts
+time: 17:40:38   event --->    accept new client
+time: 17:40:38   event --->    add new client
+time: 17:40:38   event --->    new thread starts
+time: 17:40:38   event --->    try found in cash 140540926490176
+time: 17:40:38   event --->    parse request 140540926490176
+time: 17:40:38   event --->    http server connect
+time: 17:40:38   event --->    write request 140540926490176
+time: 17:40:38   event --->    read response 140540926490176
+time: 17:40:38   event --->    read bytes: 3198
+time: 17:40:38   event --->    read bytes: 4056
+time: 17:40:38   event --->    read bytes: 692
+time: 17:40:38   event --->    read bytes: 5
+time: 17:40:38   event --->    add to cash
+time: 17:40:38   event --->    send response
+time: 17:40:38   event --->    try found in cash 140540926490176
+time: 17:40:38   event --->    parse request 140540926490176
+time: 17:40:38   event --->    accept new client
+time: 17:40:38   event --->    add new client
+time: 17:40:38   event --->    new thread starts
+time: 17:40:38   event --->    try found in cash 140540918097472
+time: 17:40:38   event --->    parse request 140540918097472
+time: 17:40:38   event --->    http server connect
+time: 17:40:38   event --->    write request 140540926490176
+time: 17:40:38   event --->    read response 140540926490176
+time: 17:40:38   event --->    http server connect
+time: 17:40:38   event --->    write request 140540918097472
+time: 17:40:38   event --->    read response 140540918097472
+time: 17:40:38   event --->    read bytes: 630
+time: 17:40:38   event --->    read bytes: 3992
+time: 17:40:53   event --->    add to cash
+time: 17:40:53   event --->    send response
+time: 17:40:53   event --->    add to cash
+time: 17:40:53   event --->    send response
+time: 17:40:53   event --->    try found in cash 140540926490176
+time: 17:40:53   event --->    parse request 140540926490176
+time: 17:40:53   event --->    http server connect
+time: 17:40:53   event --->    write request 140540926490176
+time: 17:40:53   event --->    read response 140540926490176
+time: 17:40:53   event --->    read bytes: 1568
+time: 17:40:53   event --->    try found in cash 140540918097472
+time: 17:40:53   event --->    parse request 140540918097472
+time: 17:40:53   event --->    accept new client
+time: 17:40:53   event --->    add new client
+time: 17:40:53   event --->    accept new client
+time: 17:40:53   event --->    new thread starts
+time: 17:40:53   event --->    new thread starts
+time: 17:40:53   event --->    add new client
+time: 17:40:53   event --->    accept new client
+time: 17:40:53   event --->    add new client
+time: 17:40:53   event --->    new thread starts
+time: 17:40:53   event --->    try found in cash 140540892919360
+time: 17:40:53   event --->    try found in cash 140540892919360
+time: 17:40:53   event --->    try found in cash 140540909704768
+time: 17:40:53   event --->    parse request 140540892919360
+time: 17:40:53   event --->    parse request 140540909704768
+time: 17:40:53   event --->    try found in cash 140540901312064
+time: 17:40:53   event --->    parse request 140540901312064
+time: 17:40:53   event --->    http server connect
+time: 17:40:53   event --->    write request 140540918097472
+time: 17:40:53   event --->    read response 140540918097472
+time: 17:40:53   event --->    http server connect
+time: 17:40:53   event --->    write request 140540909704768
+time: 17:40:53   event --->    read response 140540909704768
+time: 17:40:53   event --->    read bytes: 779
+time: 17:40:53   event --->    http server connect
+time: 17:40:53   event --->    http server connect
+time: 17:40:53   event --->    http server connect
+time: 17:40:53   event --->    write request 140540892919360
+time: 17:40:53   event --->    write request 140540901312064
+time: 17:40:53   event --->    read response 140540901312064
+time: 17:40:53   event --->    read bytes: 2581
+time: 17:40:53   event --->    read response 140540892919360
+time: 17:40:53   event --->    accept new client
+time: 17:40:53   event --->    add new client
+time: 17:40:53   event --->    accept new client
+time: 17:40:53   event --->    add new client
+time: 17:40:53   event --->    new thread starts
+time: 17:40:53   event --->    read bytes: 1274
+time: 17:40:53   event --->    read bytes: 747
+time: 17:40:53   event --->    try found in cash 140540876133952
+time: 17:40:53   event --->    parse request 140540876133952
+time: 17:40:53   event --->    accept new client
+time: 17:40:53   event --->    add new client
+time: 17:40:53   event --->    new thread starts
+time: 17:40:53   event --->    try found in cash 140540884526656
+time: 17:40:53   event --->    parse request 140540884526656
+time: 17:40:53   event --->    http server connect
+time: 17:40:53   event --->    write request 140540876133952
+time: 17:40:53   event --->    read response 140540876133952
+time: 17:40:53   event --->    http server connect
+time: 17:40:53   event --->    write request 140540884526656
+time: 17:40:53   event --->    read response 140540884526656
+time: 17:40:53   event --->    read bytes: 733
+time: 17:40:53   event --->    new thread starts
+time: 17:40:53   event --->    try found in cash 140540523836992
+time: 17:40:53   event --->    parse request 140540523836992
+time: 17:40:53   event --->    read bytes: 2957
+time: 17:40:53   event --->    http server connect
+time: 17:40:53   event --->    write request 140540523836992
+time: 17:40:53   event --->    read response 140540523836992
+time: 17:40:53   event --->    read bytes: 1648
+time: 17:41:8   event --->    add to cash
+time: 17:41:8   event --->    send response
+time: 17:41:8   event --->    add to cash
+time: 17:41:8   event --->    send response
+time: 17:41:8   event --->    add to cash
+time: 17:41:8   event --->    send response
+time: 17:41:8   event --->    add to cash
+:8   event --->    add to cash
+time: 17:41:8   event --->    send response
+time: 17:41:8   event --->    send response
+time: 17:41:8   event --->    add to cash
+time: 17:41:8   event --->    send response
+time: 17:41:8   event --->    add to cash
+time: 17:41:8   event --->    send response
+time: 17:41:8   event --->    add to cash
+time: 17:41:8   event --->    send response
+time: 17:41:9   event --->    try found in cash 140540918097472
+time: 17:41:9   event --->    parse request 140540918097472
+time: 17:41:9   event --->    try found in cash 140540909704768
+time: 17:41:9   event --->    parse request 140540909704768
+time: 17:41:9   event --->    try found in cash 140540884526656
+time: 17:41:9   event --->    parse request 140540884526656
+time: 17:41:9   event --->    try found in cash 140540523836992
+time: 17:41:9   event --->    try found in cash 140540892919360
+time: 17:41:9   event --->    try found in cash 140540901312064
+time: 17:41:9   event --->    try found in cash 140540876133952
+time: 17:41:9   event --->    try found in cash 140540926490176
+time: 17:41:9   event --->    parse request 140540523836992
+time: 17:41:9   event --->    parse request 140540901312064
+time: 17:41:9   event --->    parse request 140540876133952
+time: 17:41:9   event --->    accept new client
+time: 17:41:9   event --->    parse request 140540892919360
+time: 17:41:9   event --->    new thread starts
+time: 17:41:9   event --->    new thread starts
+time: 17:41:9   event --->    add new client
+time: 17:41:9   event --->    accept new client
+time: 17:41:9   event --->    add new client
+time: 17:41:9   event --->    parse request 140540926490176
+time: 17:41:9   event --->    parse request 140540926490176
+time: 17:41:9   event --->    accept new client
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    write request 140540909704768
+time: 17:41:9   event --->    read response 140540909704768
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    write request 140540884526656
+time: 17:41:9   event --->    read response 140540884526656
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    write request 140540918097472
+time: 17:41:9   event --->    read response 140540918097472
+time: 17:41:9   event --->    add new client
+time: 17:41:9   event --->    accept new client
+time: 17:41:9   event --->    add new client
+time: 17:41:9   event --->    new thread starts
+time: 17:41:9   event --->    new thread starts
+time: 17:41:9   event --->    try found in cash 140540498658880
+time: 17:41:9   event --->    parse request 140540498658880
+time: 17:41:9   event --->    try found in cash 140540490266176
+time: 17:41:9   event --->    try found in cash 140540490266176
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    parse request 140540490266176
+time: 17:41:9   event --->    read bytes: 4104
+time: 17:41:9   event --->    write request 140540523836992
+time: 17:41:9   event --->    read response 140540523836992
+time: 17:41:9   event --->    write request 140540901312064
+time: 17:41:9   event --->    read response 140540901312064
+time: 17:41:9   event --->    read bytes: 501
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    read bytes: 498
+time: 17:41:9   event --->    write request 140540892919360
+time: 17:41:9   event --->    read response 140540892919360
+time: 17:41:9   event --->    write request 140540876133952
+time: 17:41:9   event --->    read response 140540876133952
+time: 17:41:9   event --->    new thread starts
+time: 17:41:9   event --->    try found in cash 140540507051584
+time: 17:41:9   event --->    parse request 140540507051584
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    read bytes: 1614
+time: 17:41:9   event --->    read bytes: 1427
+time: 17:41:9   event --->    write request 140540926490176
+time: 17:41:9   event --->    read bytes: 1393
+time: 17:41:9   event --->    read response 140540926490176
+time: 17:41:9   event --->    read bytes: 1396
+time: 17:41:9   event --->    read bytes: 445
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    write request 140540498658880
+time: 17:41:9   event --->    write request 140540490266176
+time: 17:41:9   event --->    read response 140540498658880
+time: 17:41:9   event --->    read response 140540498658880
+time: 17:41:9   event --->    read response 140540490266176
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    read bytes: 2585
+time: 17:41:9   event --->    write request 140540507051584
+time: 17:41:9   event --->    read response 140540507051584
+time: 17:41:9   event --->    try found in cash 140540515444288
+time: 17:41:9   event --->    parse request 140540515444288
+time: 17:41:9   event --->    read bytes: 2887
+time: 17:41:9   event --->    read bytes: 2887
+time: 17:41:9   event --->    read bytes: 2699
+time: 17:41:9   event --->    read bytes: 2643
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    write request 140540515444288
+time: 17:41:9   event --->    read response 140540515444288
+time: 17:41:9   event --->    read bytes: 2736
+time: 17:41:9   event --->    read bytes: 1368
+time: 17:41:9   event --->    read bytes: 4104
+time: 17:41:9   event --->    read bytes: 2736
+time: 17:41:9   event --->    read bytes: 8208
+time: 17:41:9   event --->    read bytes: 10944
+time: 17:41:9   event --->    read bytes: 10944
+time: 17:41:9   event --->    read bytes: 1368
+time: 17:41:9   event --->    read bytes: 16416
+time: 17:41:9   event --->    read bytes: 15048
+time: 17:41:9   event --->    read bytes: 17784
+time: 17:41:9   event --->    read bytes: 15248
+time: 17:41:9   event --->    read bytes: 6840
+time: 17:41:9   event --->    read bytes: 12312
+time: 17:41:9   event --->    read bytes: 10944
+time: 17:41:9   event --->    read bytes: 5406
+time: 17:41:9   event --->    accept new client
+time: 17:41:9   event --->    add new client
+time: 17:41:9   event --->    new thread starts
+time: 17:41:9   event --->    try found in cash 140540481873472
+time: 17:41:9   event --->    parse request 140540481873472
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    write request 140540481873472
+time: 17:41:9   event --->    read response 140540481873472
+time: 17:41:9   event --->    read bytes: 4104
+time: 17:41:9   event --->    accept new client
+time: 17:41:9   event --->    new thread starts
+time: 17:41:9   event --->    add new client
+time: 17:41:9   event --->    try found in cash 140540473480768
+time: 17:41:9   event --->    parse request 140540473480768
+time: 17:41:9   event --->    read bytes: 5472
+time: 17:41:9   event --->    http server connect
+time: 17:41:9   event --->    write request 140540473480768
+time: 17:41:9   event --->    read response 140540473480768
+time: 17:41:9   event --->    read bytes: 2091
+time: 17:41:9   event --->    read bytes: 1342
+time: 17:41:10   event --->    accept new client
+time: 17:41:10   event --->    add new client
+time: 17:41:10   event --->    new thread starts
+time: 17:41:10   event --->    accept new client
+time: 17:41:10   event --->    add new client
+time: 17:41:10   event --->    new thread starts
+time: 17:41:16   event --->    client disconnect 140539911464512
+time: 17:41:16   event --->    client disconnect 140539919857216
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    add to cash
+time: 17time:  41:2417 event --->     c:end response441:
+24   event --->    add to cash
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    send response
+esponse441:
+24time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    add to cash
+time: 17:41:24   event --->    send response
+time: 17:41:24   event --->    send response
+time: 17:41:39   event --->    client disconnect 140540490266176
+time: 17:41:39   event --->    client disconnect 140540876133952
+time: 17:41:39   event --->    client disconnect 140540901312064
+time: 17:41:39   event --->    client disconnect 140540901312064
+time: 17:41:39   event --->    client disconnect 140540884526656
+time: 17:41:39   event --->    client disconnect 140540918097472
+time: 17:41:39   event --->    client disconnect 140540918097472
+time: 17:41:39   event --->    client disconnect 140540892919360
+time: 17:41:39   event --->    client disconnect 140540507051584
+time: 17:41:39   event --->    client disconnect 140540926490176
+time: 17:41:39   event --->    client disconnect 140540909704768
+time: 17:41:40   event --->    client disconnect 140540473480768
+time: 17:41:40   event --->    client disconnect 140540473480768
+time: 17:41:40   event --->    client disconnect 140540523836992
+time: 17:41:40   event --->    client disconnect 140540515444288
+time: 17:41:40   event --->    client disconnect 140540498658880
+time: 17:41:40   event --->    client disconnect 140540481873472

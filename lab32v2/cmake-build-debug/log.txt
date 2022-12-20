@@ -1,0 +1,94 @@
+time: 15:59:55   event --->    start program
+time: 15:59:59   event --->    accept new client with out problem
+time: 15:59:59   event --->    http server connect
+time: 15:59:59   event --->    add to cash
+time: 15:59:59   event --->    logout
+time: 15:59:59   event --->    user logout
+time: 15:59:59   event --->    destructor client
+time: 15:59:59   event --->    logout
+time: 15:59:59   event --->    http server logout
+time: 15:59:59   event --->    delete buffer
+time: 15:59:59   event --->    destructor client
+time: 15:59:59   event --->    accept new client with out problem
+time: 15:59:59   event --->    accept new client with out problem
+time: 16:0:0   event --->    http server connect
+time: 16:0:0   event --->    http server connect
+time: 16:0:0   event --->    add to cash
+time: 16:0:0   event --->    logout
+time: 16:0:0   event --->    user logout
+time: 16:0:0   event --->    destructor client
+time: 16:0:0   event --->    logout
+time: 16:0:0   event --->    http server logout
+time: 16:0:0   event --->    delete buffer
+time: 16:0:0   event --->    destructor client
+time: 16:0:0   event --->    add to cash
+time: 16:0:0   event --->    logout
+time: 16:0:0   event --->    user logout
+time: 16:0:0   event --->    destructor client
+time: 16:0:0   event --->    logout
+time: 16:0:0   event --->    http server logout
+time: 16:0:0   event --->    delete buffer
+time: 16:0:0   event --->    destructor client
+time: 16:0:5   event --->    accept new client with out problem
+time: 16:0:5   event --->    http server connect
+time: 16:0:5   event --->    logout
+time: 16:0:5   event --->    user logout
+time: 16:0:5   event --->    logout
+time: 16:0:5   event --->    http server logout
+time: 16:0:5   event --->    destructor client
+time: 16:0:5   event --->    delete buffer
+time: 16:0:5   event --->    destructor client
+time: 16:0:5   event --->    accept new client with out problem
+time: 16:0:5   event --->    http server connect
+time: 16:0:5   event --->    accept new client with out problem
+time: 16:0:5   event --->    logout
+time: 16:0:5   event --->    user logout
+time: 16:0:5   event --->    logout
+time: 16:0:5   event --->    http server logout
+time: 16:0:5   event --->    destructor client
+time: 16:0:5   event --->    delete buffer
+time: 16:0:5   event --->    destructor client
+time: 16:0:5   event --->    http server connect
+time: 16:0:5   event --->    logout
+time: 16:0:5   event --->    user logout
+time: 16:0:5   event --->    logout
+time: 16:0:5   event --->    http server logout
+time: 16:0:5   event --->    destructor client
+time: 16:0:5   event --->    delete buffer
+time: 16:0:5   event --->    destructor client
+time: 16:0:6   event --->    accept new client with out problem
+time: 16:0:6   event --->    http server connect
+time: 16:0:6   event --->    logout
+time: 16:0:6   event --->    user logout
+time: 16:0:6   event --->    logout
+time: 16:0:6   event --->    http server logout
+time: 16:0:6   event --->    destructor client
+time: 16:0:6   event --->    delete buffer
+time: 16:0:6   event --->    destructor client
+time: 16:0:7   event --->    accept new client with out problem
+time: 16:0:7   event --->    http server connect
+time: 16:0:7   event --->    logout
+time: 16:0:7   event --->    user logout
+time: 16:0:7   event --->    logout
+time: 16:0:7   event --->    http server logout
+time: 16:0:7   event --->    destructor client
+time: 16:0:7   event --->    delete buffer
+time: 16:0:7   event --->    destructor client
+time: 16:0:7   event --->    accept new client with out problem
+time: 16:0:8   event --->    http server connect
+time: 16:0:8   event --->    accept new client with out problem
+time: 16:0:8   event --->    http server connect
+time: 16:0:8   event --->    logout
+time: 16:0:8   event --->    user logout
+time: 16:0:8   event --->    logout
+time: 16:0:8   event --->    http server logout
+time: 16:0:8   event --->    destructor client
+time: 16:0:8   event --->    delete buffer
+time: 16:0:8   event --->    destructor client
+time: 16:0:8   event --->    logout
+time: 16:0:8   event --->    user logout
+time: 16:0:8   event --->    logout
+time: 16:0:8   event --->    http server logout
+time: 16:0:8   event --->    destructor client
+time: 16:0:8   event --->    delete buffer
+time: 16:0:8   event --->    destructor client

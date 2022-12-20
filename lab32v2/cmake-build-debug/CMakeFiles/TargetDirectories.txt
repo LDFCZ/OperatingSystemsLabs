@@ -1,0 +1,3 @@
+/home/ldfcz/osi/lab32proxy/cmake-build-debug/CMakeFiles/lab32proxy.dir
+/home/ldfcz/osi/lab32proxy/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ldfcz/osi/lab32proxy/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -2,11 +2,14 @@
 #include "server/ServerImpl.h"
 #include "logger/Logger.h"
 
+
 //#include "cash/CashImpl.h"
 //#include "buffer/BufferImpl.h"
 
+
 int main(int argc, char *argv[]) {
     LOG_EVENT("start program");
+
     try {
         ProxyServer::ServerImpl *server = new ProxyServer::ServerImpl();
         server->startServer();
