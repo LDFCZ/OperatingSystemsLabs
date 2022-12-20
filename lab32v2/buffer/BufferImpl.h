@@ -1,5 +1,5 @@
 //
-// Created by kurya on 06.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_BUFFERIMPL_H
@@ -10,13 +10,13 @@
 #include "../parser/ParserTypeRequest.h"
 #include "../parser/ParserImpl.h"
 #include "../Constants.h"
-#include <string.h>
+#include <cstring>
 #include <bitset>
 
 namespace ProxyServer {
     class BufferImpl : public Buffer {
     public:
-        BufferImpl(Cash *cash);
+        explicit BufferImpl(Cash *cash);
 
         void readFromSocket(std::string *binaryString) override;
 
@@ -70,14 +70,14 @@ namespace ProxyServer {
         bool _isEndSend = false;
         bool _isReadyConnectHttpServer = false;
         long long int _lengthBody = 0;
-        ResultParseHeading *_resultParseHeading = NULL;
-        bool _isHaveContentLengthresponse = false;
+        ResultParseHeading *_resultParseHeading = nullptr;
+        bool _isHaveContentLengthResponse = false;
 
         bool _isAddDataToCash = false;
         bool _isDataGetCash = false;
         long long int _countByteReadFromCash = 0;
 
-        CashElement *_cashElement = NULL;
+        CashElement *_cashElement = nullptr;
 
         void wrightRequestHeading(std::string *binaryString);
 

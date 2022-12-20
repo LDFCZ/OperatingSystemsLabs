@@ -1,5 +1,5 @@
 //
-// Created by kurya on 06.12.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_NEWSERVERIMPL_H
@@ -33,15 +33,6 @@ namespace ProxyServer {
         ~NewServerImpl();
         static void *startingMethodForThread(void *args);
     private:
-
-//        void saveResultPollSet();
-//        void setPollSetBeforePoll();
-//        void handlingEvent();
-
-//        void deleteClient(std::list<Client*>::iterator* iterator);
-//        void deleteClientUser(Client* client);
-//        void deleteClientServer(Client* client);
-//        void findElementWithCurrentCash(Client* client);
 
         ServerSocket* _serverSocket;
         Cash *_cash;

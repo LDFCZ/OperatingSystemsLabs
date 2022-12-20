@@ -1,5 +1,5 @@
 //
-// Created by kurya on 03.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #include "ClientImpl.h"
@@ -38,7 +38,6 @@ ClientImpl::ClientImpl(int sock, TypeClient typeClient, Buffer *buf) {
     } else if (typeClient == TypeClient::HTTP_SERVER) {
         _structPollFd.events = POLLOUT | POLLIN | POLLRDHUP;
     }
-//    _structPollFd.events = POLLOUT | POLLIN;
     _structPollFd.revents = 0;
 }
 

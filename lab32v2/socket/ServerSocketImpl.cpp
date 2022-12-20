@@ -1,10 +1,10 @@
 //
-// Created by kurya on 03.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #include <iostream>
 #include "ServerSocketImpl.h"
-
+// TODO mutex error code read
 
 using namespace ProxyServer;
 
@@ -87,7 +87,7 @@ ServerSocketImpl::~ServerSocketImpl() {
 Client *ServerSocketImpl::connectToClient(std::string url, int port) {
     pthread_mutex_lock(&mutexForServer);
     struct hostent *hostent = gethostbyname(url.data());
-    if (hostent == NULL) {
+    if (hostent == nullptr) {
         LOG_ERROR("gethostbyname");
         herror("gethostbyname");
         pthread_mutex_unlock(&mutexForServer);

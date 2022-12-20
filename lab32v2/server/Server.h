@@ -1,6 +1,5 @@
-
 //
-// Created by kurya on 03.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_SERVER_H
@@ -10,8 +9,6 @@ namespace ProxyServer {
     class Server {
     public:
         virtual void startServer() = 0;
-//    protected:
-//        virtual ~server() = 0;
     };
 }
 

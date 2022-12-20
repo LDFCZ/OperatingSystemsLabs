@@ -1,14 +1,12 @@
 //
-// Created by kurya on 06.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_BUFFER_H
 #define LAB31PROXY_BUFFER_H
 
-//#include "../parser/ResultParseHeading.h"
-//#include "../binaryString/BinaryString.h"
 #include <memory>
-#include <string.h>
+#include <cstring>
 #include "../cash/CashElement.h"
 #include "../cash/Cash.h"
 #include "../parser/ResultParseHeading.h"
@@ -22,14 +20,11 @@ namespace ProxyServer {
         WRITE_RESPONSE_HEADING,
         WRITE_RESPONSE_BODY,
         END_WORK
-        //WRITE_REQUEST
     } StatusHttp;
 
     class Buffer {
     public:
         virtual void readFromSocket(std::string *binaryString) = 0;
-
-//        virtual void readResponse(char *buf) = 0;
 
         virtual void sendBuf(std::string *binaryString) = 0;
 

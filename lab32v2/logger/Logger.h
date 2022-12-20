@@ -1,5 +1,5 @@
 //
-// Created by kurya on 04.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_LOGGER_H
@@ -29,14 +29,14 @@ public:
         //loggerFile.open("log.txt");
     }
 
-    void logEvent(std::string str) {
-        std::time_t t = std::time(0);   // get time now
+    void logEvent(const std::string& str) {
+        std::time_t t = std::time(nullptr);   // get time now
         std::tm *now = std::localtime(&t);
         std::cout << "time: " << TIME_NOW << "   event --->    " << str << std::endl;
     }
 
-    void logError(std::string error) {
-        std::time_t t = std::time(0);   // get time now
+    void logError(const std::string& error) {
+        std::time_t t = std::time(nullptr);   // get time now
         std::tm *now = std::localtime(&t);
         std::cout << "time: " << TIME_NOW << "   ERROR --->    " << error << std::endl;
     }

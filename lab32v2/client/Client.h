@@ -1,12 +1,11 @@
 //
-// Created by kurya on 02.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_CLIENTINTERFACE_H
 #define LAB31PROXY_CLIENTINTERFACE_H
-//#include "ClientData.h"
+
 #include "../buffer/Buffer.h"
-//#include "../binaryString/BinaryString.h"
 #include <sys/poll.h>
 #include <memory>
 #include <list>

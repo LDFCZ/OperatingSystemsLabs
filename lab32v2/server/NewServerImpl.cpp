@@ -1,9 +1,11 @@
 //
-// Created by kurya on 06.12.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #include "NewServerImpl.h"
 #include <pthread.h>
+
+// TODO not errno
 
 using namespace ProxyServer;
 
@@ -36,14 +38,13 @@ void NewServerImpl::startServer() {
 }
 
 void *NewServerImpl::startingMethodForThread(void *args) {
-    ArgsForThread *argsForThread = (ArgsForThread *) args;
+    auto *argsForThread = (ArgsForThread *) args;
     Client *client = new ClientImpl(argsForThread->getSock(), TypeClient::USER,
                                     new BufferImpl(argsForThread->getCash()));
     client->getBuffer()->setIsClientConnect(true);
     HandlerOneClientImpl handlerOneClient = HandlerOneClientImpl(client);
     handlerOneClient.startHandler();
-    pthread_exit(NULL);
-//    std::cout << "thread end work" << std::endl;
+    pthread_exit(nullptr);
 }
 
 NewServerImpl::NewServerImpl() {

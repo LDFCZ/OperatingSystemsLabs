@@ -1,5 +1,5 @@
 //
-// Created by kurya on 07.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_CASHELEMENTIMPL_H
@@ -14,7 +14,7 @@
 namespace ProxyServer {
     class CashElementImpl : public CashElement {
     public:
-        explicit CashElementImpl(std::string heading, long long int dataSize);
+        explicit CashElementImpl(const std::string& heading, long long int dataSize);
 
         bool isDownloadEnd() override;
 

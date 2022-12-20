@@ -1,5 +1,5 @@
 //
-// Created by kurya on 03.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_SERVERSOCKET_H
@@ -20,7 +20,6 @@ namespace ProxyServer {
         virtual Client* acceptNewClient(Cash* cash) = 0;
 
         virtual int acceptNewClientSock() = 0;
-//        virtual Client* connectToClient(std::string url, int port) = 0;
 
         virtual void closeSocket() = 0;
     };

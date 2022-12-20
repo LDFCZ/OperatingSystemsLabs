@@ -1,5 +1,5 @@
 //
-// Created by kurya on 07.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_CASHELEMENT_H
@@ -7,7 +7,6 @@
 
 #include <string>
 #include "../logger/Logger.h"
-//#include "../observer/Observable.h"
 #include <memory>
 
 namespace ProxyServer {

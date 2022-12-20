@@ -1,5 +1,5 @@
 //
-// Created by kurya on 04.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_CONNECTEXCEPTION_H

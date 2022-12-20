@@ -1,5 +1,5 @@
 //
-// Created by kurya on 10.12.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB32PROXY_HANDLERONECLIENT_H

@@ -1,5 +1,5 @@
 //
-// Created by kurya on 04.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_PARSERIMPL_H
@@ -15,10 +15,10 @@ namespace ProxyServer {
     class ParserImpl {
     public:
         static TypeRequestAndResponse parsingRequest(char *buf, char* host);
-        static ResultPars findEndHeading(std::string buf, int* posEnd);
-        static ResultPars findEndBody(std::string buffer, int* posEnd);
-        static ResultParseHeading* parsingHeading(std::string heading);
-        static ResultParseHeading parsingResponseHeading(std::string heading);
+        static ResultPars findEndHeading(const std::string& buf, int* posEnd);
+        static ResultPars findEndBody(const std::string& buffer, int* posEnd);
+        static ResultParseHeading* parsingHeading(const std::string& heading);
+        static ResultParseHeading parsingResponseHeading(const std::string& heading);
 
     private:
         static void findHostAndPort(ResultParseHeading* result, std::string buf);

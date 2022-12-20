@@ -1,5 +1,5 @@
 //
-// Created by kurya on 03.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_SERVERSOCKETIMPL_H
@@ -9,10 +9,10 @@
 #include "../logger/Logger.h"
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include <cctype>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
 #include <sys/un.h>
 #include <unistd.h>
 #include <netinet/in.h>
@@ -45,11 +45,9 @@ namespace ProxyServer {
 
         ~ServerSocketImpl();
 
-//        static pthread_mutex_t* mutexForServer;
     private:
         int serverSocket_ = 0;
     };
-//    Client *connectToClient(std::string url, int port);
 }
 
 

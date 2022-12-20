@@ -1,5 +1,5 @@
 //
-// Created by kurya on 04.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #include <iostream>
@@ -8,14 +8,9 @@
 
 using namespace ProxyServer;
 
-ResultPars ParserImpl::findEndHeading(std::string buf, int *posEnd) {
+ResultPars ParserImpl::findEndHeading(const std::string& buf, int *posEnd) {
     int resultFinding = buf.find("\r\n\r\n");
     if (resultFinding == std::string::npos) {
-//        resultFinding = buf.find("\n\n");
-//        if (resultFinding != std::string::npos) {
-//            *posEnd = resultFinding + 2;
-//            return ResultPars::END_HEADING;
-//        }
         *posEnd = -1;
         return ResultPars::NOTHING;
     } else {
@@ -28,8 +23,8 @@ TypeRequestAndResponse ParserImpl::parsingRequest(char *buf, char *host) {
     return NOT_GET_REQUEST;
 }
 
-ResultParseHeading *ParserImpl::parsingHeading(std::string heading) {
-    ResultParseHeading *result = new ResultParseHeading;
+ResultParseHeading *ParserImpl::parsingHeading(const std::string& heading) {
+    auto *result = new ResultParseHeading;
     if (heading.size() > 3) {
         if (heading.substr(0, 3) == "GET") {
             result->setType(TypeRequestAndResponse::GET_REQUEST);
@@ -42,31 +37,11 @@ ResultParseHeading *ParserImpl::parsingHeading(std::string heading) {
         result->setType(TypeRequestAndResponse::INVALID);
         LOG_ERROR("incorrect heading");
         throw ParseException("incorrect heading");
-        // TODO обработать ?
     }
-
-//    findContentLength(result, heading);
-//    int contentLength = heading.find("Content-Length: ");
-//    if (contentLength != std::string::npos) {
-//        int endContentLength = heading.find("\r\n", contentLength);
-//        if (endContentLength != std::string::npos) {
-//            contentLength += std::string("Content-Length: ").size();
-//            result->setContentLength(atoi(
-//                    heading.substr(contentLength, endContentLength - contentLength).c_str()));
-//            result->setHaveContentLength(true);
-//        }
-//    } else {
-////        if (result->getType() == TypeRequestAndResponse::GET_REQUEST) {
-////            result->setType(TypeRequestAndResponse::GET_REQUEST_NOT_CASH);
-////        }
-//        result->setHaveContentLength(false);
-//        result->setContentLength(0);
-//    }
-
     return result;
 }
 
-ResultParseHeading ParserImpl::parsingResponseHeading(std::string heading) {
+ResultParseHeading ParserImpl::parsingResponseHeading(const std::string& heading) {
     ResultParseHeading result; //HTTP/1.1 200 OK
     int statusResponse = heading.find("HTTP/1.1 200 OK");
     if (statusResponse == std::string::npos) {
@@ -89,7 +64,7 @@ ResultParseHeading ParserImpl::parsingResponseHeading(std::string heading) {
     return result;
 }
 
-ResultPars ParserImpl::findEndBody(std::string buffer, int *posEnd) {
+ResultPars ParserImpl::findEndBody(const std::string& buffer, int *posEnd) {
     int resultFinding = buffer.find("0\r\n\r\n");
     if (resultFinding == std::string::npos) {
         *posEnd = -1;
@@ -130,10 +105,8 @@ void ParserImpl::findContentLength(ResultParseHeading *result, std::string buf) 
         if (resRegex.size() == 2) {
             result->setContentLength(atoi(resRegex[1].str().c_str()));
             result->setHaveContentLength(true);
-//            result->setType(TypeRequestAndResponse::NORMAL_RESPONSE);
         }
     } else {
         result->setHaveContentLength(false);
-//        result->setType(TypeRequestAndResponse::NOT_CASH_RESPONSE);
     }
 }

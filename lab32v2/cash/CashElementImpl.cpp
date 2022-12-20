@@ -1,9 +1,11 @@
 //
-// Created by kurya on 07.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 
 #include "CashElementImpl.h"
+
+// TODO mutex error code
 
 using namespace ProxyServer;
 
@@ -19,9 +21,9 @@ std::shared_ptr<std::string> CashElementImpl::getCash() {
     return _cash;
 }
 
-CashElementImpl::CashElementImpl(std::string heading, long long int dataSize) {
-    pthread_rwlock_init(&_mutexForData, NULL);
-    pthread_mutex_init(&_mutexForSubscribers, NULL);
+CashElementImpl::CashElementImpl(const std::string& heading, long long int dataSize) {
+    pthread_rwlock_init(&_mutexForData, nullptr);
+    pthread_mutex_init(&_mutexForSubscribers, nullptr);
     _requestHeading = heading;
     std::hash<std::string> hasher;
     _cash->resize(dataSize - heading.size());
@@ -123,9 +125,3 @@ void CashElementImpl::signalUsers() {
     }
     pthread_mutex_unlock(&_mutexForSubscribers);
 }
-
-// list subers
-//blokirovka на течение \ запись mutex lock
-// удалить на атомарных операциях
-// передавать указщатель в append
-// (нэйминг поправить)

@@ -1,5 +1,5 @@
 //
-// Created by kurya on 06.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #include <cstring>
@@ -8,7 +8,7 @@
 using namespace ProxyServer;
 
 void BufferImpl::readFromSocket(std::string *binaryString) {
-    if(_isClientConnect == false && _statusHttpServer == StatusHttp::WRITE_RESPONSE_BODY) {
+    if(!_isClientConnect && _statusHttpServer == StatusHttp::WRITE_RESPONSE_BODY) {
         _buf->clear();
     } else {
         _buf->append(*binaryString);
@@ -22,13 +22,12 @@ void BufferImpl::readFromSocket(std::string *binaryString) {
     } else if (_statusHttpServer == StatusHttp::WRITE_RESPONSE_BODY) {
         wrightResponseBody(binaryString);
     }
-// TODO parse RESPONSE RESULT heading
 }
 
 void BufferImpl::wrightRequestHeading(std::string *binaryString) {
     int posEndHeading = 0;
     if (ParserImpl::findEndHeading(*_buf, &posEndHeading) == ResultPars::END_HEADING) {
-        _requestHeading = _buf->substr(0, posEndHeading); // так как не бинарные ресурсы
+        _requestHeading = _buf->substr(0, posEndHeading);
         parsHead();
         if (_cash->isElementInCash(_requestHeading)) {
             std::cout << "data get from cash" << std::endl;
@@ -74,7 +73,7 @@ void BufferImpl::wrightResponseHeading(std::string *binaryString) {
             !_cash->isElementInCash(_requestHeading)) {
             _cashElement = _cash->addStringToCash(_requestHeading,
                                                   resultParseHeading.getContentLength() + responseHead.size());
-            if (_cashElement != NULL) {
+            if (_cashElement != nullptr) {
                 _isAddDataToCash = true;
                 _cashElement->appendStringToCash(&(*_buf));
                 _cashElement->setDownloadEnd(false);
@@ -86,9 +85,9 @@ void BufferImpl::wrightResponseHeading(std::string *binaryString) {
 
         _isReadyToSend = true;
         _statusHttpServer = StatusHttp::WRITE_RESPONSE_BODY;
-        _isHaveContentLengthresponse = resultParseHeading.isHaveContentLength();
+        _isHaveContentLengthResponse = resultParseHeading.isHaveContentLength();
 
-        if (_isHaveContentLengthresponse) {
+        if (_isHaveContentLengthResponse) {
             _lengthBody = resultParseHeading.getContentLength();
             _lengthBody -= _buf->length() - responseHead.size();
             if (_lengthBody <= 0) {
@@ -115,7 +114,7 @@ void BufferImpl::wrightResponseBody(std::string *binaryString) {
     if (_isAddDataToCash) {
         _cashElement->appendStringToCash(binaryString);
     }
-    if (_isHaveContentLengthresponse) {
+    if (_isHaveContentLengthResponse) {
         _lengthBody -= (binaryString)->length();
         if (_lengthBody <= 0) {
             _isEndSend = true;
@@ -170,7 +169,7 @@ void BufferImpl::sendBuf(std::string *binaryString) {
 }
 
 void BufferImpl::proofSend(std::string *binaryString) {
-    if (_isDataGetCash) { // TODO: error rework !error
+    if (_isDataGetCash) {
         _countByteReadFromCash += (binaryString)->length();
         if (_cashElement->getLength() == _countByteReadFromCash) {
             _isReadyToSend = false;
@@ -192,7 +191,7 @@ void BufferImpl::proofSend(std::string *binaryString) {
 
 
     if (_buf->empty() && _isEndSend) {
-        if (_statusClient == READ_RESPONSE && error) { // TODO подумать как иначе
+        if (_statusClient == READ_RESPONSE && error) {
             _statusClient = StatusHttp::END_WORK;
             _isEndSend = false;
             return;
@@ -238,9 +237,7 @@ bool BufferImpl::isReadyToSend() {
 
 BufferImpl::~BufferImpl() {
     LOG_EVENT("delete buffer");
-    if (_resultParseHeading != NULL) {
-        delete _resultParseHeading;
-    }
+    delete _resultParseHeading;
 }
 
 bool BufferImpl::isSendEnd() {
@@ -262,7 +259,7 @@ BufferImpl::BufferImpl(Cash *cash) {
 void BufferImpl::parsHead() {
     try {
         _resultParseHeading = ParserImpl::parsingHeading(_requestHeading);
-    } catch (ParseException ex) {
+    } catch (ParseException& ex) {
         std::cerr << ex.what() << std::endl;
         _buf->clear();
         char data[] = "incorrect heading\r\n";

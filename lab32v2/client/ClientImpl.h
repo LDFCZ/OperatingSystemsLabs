@@ -1,5 +1,5 @@
 //
-// Created by kurya on 03.11.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #ifndef LAB31PROXY_CLIENTIMPL_H
@@ -10,7 +10,6 @@
 #include <cstring>
 #include <unistd.h>
 #include <iostream>
-//#include "ClientImpl.h"
 #include "../Constants.h"
 
 namespace ProxyServer {
@@ -60,7 +59,7 @@ namespace ProxyServer {
         TypeClient _typeClient;
         ProxyServer::Buffer *_buffer;
         std::list<Client*> _listHandlingEvent;
-        Client *_pair = NULL;
+        Client *_pair = nullptr;
         struct pollfd _structPollFd;
     };
 }

@@ -1,13 +1,15 @@
 //
-// Created by kurya on 10.12.2022.
+// Created by ldfcz on 07.12.22.
 //
 
 #include "HandlerOneClientImpl.h"
 
+// TODO errno fix
+
 using namespace ProxyServer;
 
 void HandlerOneClientImpl::startHandler() {
-    while (_clientList.size() > 0) {
+    while (!_clientList.empty()) {
         setPollSetBeforePoll();
         int code = poll(_pollSet, _clientList.size(), TIME_OUT_POLL);
         saveResultPollSet();
@@ -15,21 +17,21 @@ void HandlerOneClientImpl::startHandler() {
             LOG_ERROR_WITH_ERRNO("poll error");
             perror("poll error");
             break;
-            //TODO exit
+
         } else if (code == 0) {
-            int status = handlingEvent();
+            bool status = handlingEvent();
             if (status) {
                 getFromCash();
                 deleteClientUser(_client);
-                pthread_exit(NULL);
+                pthread_exit(nullptr);
             }
             std::cout << "time out" << std::endl;
         } else {
-            int status = handlingEvent();
+            bool status = handlingEvent();
             if (status) {
                 getFromCash();
                 deleteClientUser(_client);
-                pthread_exit(NULL);
+                pthread_exit(nullptr);
             }
         }
     }
@@ -42,13 +44,10 @@ HandlerOneClientImpl::HandlerOneClientImpl(Client *client) {
 }
 
 HandlerOneClientImpl::~HandlerOneClientImpl() {
-//    for (auto &it: _clientList) {
-//        delete it;
-//    }
+
 }
 
 void HandlerOneClientImpl::setPollSetBeforePoll() {
-//    LOG_EVENT("update pollSet");
     memset(_pollSet, 0, 2 * sizeof(struct pollfd));
 
     int i = 0;
@@ -82,24 +81,22 @@ bool HandlerOneClientImpl::handlingEvent() {
                     if ((*it)->getTypeClient() == USER) {
                         if ((*it)->getBuffer()->getStatusClient() == READ_RESPONSE
                             && (*it)->getBuffer()->isIsDataGetCash()) {
-                            return 1;
+                            return true;
                         }
                     }
                     if ((*it)->getTypeClient() == HTTP_SERVER) {
                         std::list<Client *> fromServ = (*it)->getListHandlingEvent();
-                        for (auto itList = fromServ.begin();
-                             itList != fromServ.end(); itList++) {
-                            (*itList)->setEvents(POLLOUT | POLLIN | POLLRDHUP);
+                        for (auto & itList : fromServ) {
+                            itList->setEvents(POLLOUT | POLLIN | POLLRDHUP);
                         }
                     } else if ((*it)->getTypeClient() == USER) {
-                        if ((*it)->getPair() != NULL) {
+                        if ((*it)->getPair() != nullptr) {
                             (*it)->getPair()->setEvents(POLLOUT | POLLIN | POLLRDHUP);
                         }
                     }
                 } catch (ParseException &ex) {
                     std::cerr << ex.what() << std::endl;
                     LOG_ERROR("send error and disconnect");
-                    //TODO disconnect
                 }
                 if ((*it)->getBuffer()->isReadyConnectHttpServer()) {
                     (*it)->getBuffer()->setReadyConnectHttpServer(false);
@@ -117,8 +114,7 @@ bool HandlerOneClientImpl::handlingEvent() {
                         std::cerr << ex.what() << std::endl;
                         LOG_ERROR("can't connect to http server");
                         deleteClient(&it);
-                        pthread_exit(NULL);
-                        return 0;
+                        pthread_exit(nullptr);
                     }
                 }
             }
@@ -128,11 +124,6 @@ bool HandlerOneClientImpl::handlingEvent() {
             !(*it)->getBuffer()->isIsAddDataToCash()) {
             deleteClient(&it);
             continue;
-//        } else if ((*it)->getTypeClient() == TypeClient::HTTP_SERVER &&
-//                   (*it)->getBuffer()->getStatusClient() == StatusHttp::END_WORK &&
-//                   !(*it)->getBuffer()->isIsDataGetCash()) {
-//            deleteClient(&it);
-//            continue;
         } else if ((*it)->getTypeClient() == TypeClient::USER &&
                    (*it)->getBuffer()->getStatusClient() == StatusHttp::END_WORK) {
             deleteClient(&it);
@@ -164,17 +155,16 @@ bool HandlerOneClientImpl::handlingEvent() {
                     (*it)->sendBuf(&buffer);
                     (*it)->getBuffer()->proofSend(&buffer);
 
-                    if ((*it)->getTypeClient() == TypeClient::HTTP_SERVER && //переключение
+                    if ((*it)->getTypeClient() == TypeClient::HTTP_SERVER &&
                         (*it)->getBuffer()->getStatusHttpServer() == WRITE_RESPONSE_HEADING
                         && !(*it)->getBuffer()->isReadyToSend()) {
                         (*it)->setEvents(POLLIN | POLLRDHUP);
                         std::list<Client *> fromServ = (*it)->getListHandlingEvent();
-                        for (auto itList = fromServ.begin();
-                             itList != fromServ.end(); itList++) {
-                            (*itList)->setEvents(POLLOUT | POLLIN | POLLRDHUP);
+                        for (auto & itList : fromServ) {
+                            itList->setEvents(POLLOUT | POLLIN | POLLRDHUP);
                         }
 
-                    } else if ((*it)->getTypeClient() == TypeClient::USER && // при отключении сервера
+                    } else if ((*it)->getTypeClient() == TypeClient::USER &&
                                (*it)->getBuffer()->getStatusHttpServer() == END_WORK
                                && !(*it)->getBuffer()->isReadyToSend()) {
                         deleteClient(&it);
@@ -188,12 +178,11 @@ bool HandlerOneClientImpl::handlingEvent() {
         }
 
     }
-    return 0;
+    return false;
 }
 
 void HandlerOneClientImpl::deleteClient(std::list<Client *>::iterator *iterator) {
     LOG_EVENT("logout");
-//    std::cout << "dell client " << std::endl;
     if ((**iterator)->getTypeClient() == TypeClient::USER) {
         deleteClientUser(**iterator);
     } else if ((**iterator)->getTypeClient() == TypeClient::HTTP_SERVER) {
@@ -204,27 +193,20 @@ void HandlerOneClientImpl::deleteClient(std::list<Client *>::iterator *iterator)
 
 void HandlerOneClientImpl::deleteClientUser(Client *client) {
     LOG_EVENT("user logout");
-//    std::cout << "user logout" << std::endl;
-    if (client->getPair() != NULL) {
+    if (client->getPair() != nullptr) {
         client->getPair()->eraseIt(client);
 
-        if (client->getBuffer() != NULL) {
+        if (client->getBuffer() != nullptr) {
             if (!client->getBuffer()->isIsAddDataToCash()) {
                 for (auto it = _clientList.begin(); it != _clientList.end(); it++) {
                     if (*it == client->getPair())
                         deleteClient(&it);
                 }
             }
-//            if (!client->getBuffer()->isIsDataGetCash()) {
-//                for (auto it = _clientList.begin(); it != _clientList.end(); it++) {
-//                    if (*it == client->getPair())
-//                        deleteClient(&it);
-//                }
-//            }
         }
     }
 
-    if (client->getBuffer() != NULL) {
+    if (client->getBuffer() != nullptr) {
         if (client->getBuffer()->isIsDataGetCash()) {
             client->getBuffer()->getCashElement()->minusCountUsers();
         }
@@ -232,7 +214,7 @@ void HandlerOneClientImpl::deleteClientUser(Client *client) {
         client->getBuffer()->setIsClientConnect(false);
         if (!client->getBuffer()->isIsServerConnect()) {
             delete client->getBuffer();
-            client->setBuffer(NULL);
+            client->setBuffer(nullptr);
         }
     }
     delete client;
@@ -240,13 +222,12 @@ void HandlerOneClientImpl::deleteClientUser(Client *client) {
 
 void HandlerOneClientImpl::deleteClientServer(Client *client) {
     LOG_EVENT("http server logout");
-//    std::cout << "server logout" << std::endl;
     std::list<Client *> fromServ = client->getListHandlingEvent();
-    for (auto itList = fromServ.begin(); itList != fromServ.end(); itList++) {
-        (*itList)->setPair(NULL);
-        (*itList)->setEvents(POLLOUT | POLLIN | POLLRDHUP);
+    for (auto & itList : fromServ) {
+        itList->setPair(nullptr);
+        itList->setEvents(POLLOUT | POLLIN | POLLRDHUP);
     }
-    if (client->getBuffer() != NULL) {
+    if (client->getBuffer() != nullptr) {
         if (client->getBuffer()->isIsAddDataToCash()) {
             client->getBuffer()->getCashElement()->setIsServerConnect(false);
         }
@@ -254,7 +235,7 @@ void HandlerOneClientImpl::deleteClientServer(Client *client) {
         client->getBuffer()->setIsServerConnect(false);
         if (!client->getBuffer()->isIsClientConnect()) {
             delete client->getBuffer();
-            client->setBuffer(NULL);
+            client->setBuffer(nullptr);
         }
     }
     delete client;
@@ -304,13 +285,13 @@ void HandlerOneClientImpl::getFromCash() {
 }
 
 bool HandlerOneClientImpl::initializeResources(pthread_mutex_t *mutex, pthread_cond_t *cond) {
-    errno = pthread_mutex_init(mutex, NULL);
+    errno = pthread_mutex_init(mutex, nullptr);
     if (errno != SUCCESS) {
         perror("mutex init");
         return FAILURE;
     }
 
-    errno = pthread_cond_init(cond, NULL);
+    errno = pthread_cond_init(cond, nullptr);
     if (errno != SUCCESS) {
         pthread_mutex_destroy(mutex);
         perror("cond init");
@@ -354,6 +335,7 @@ int HandlerOneClientImpl::sendAll() {
         }
         _client->getBuffer()->proofSend(&buffer);
     }
+    return SUCCESS;
 }
 
 
