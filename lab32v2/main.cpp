@@ -2,10 +2,6 @@
 #include "server/NewServerImpl.h"
 #include "logger/Logger.h"
 
-
-
-
-#include <pthread.h>
 int main(int argc, char *argv[]) {
     LOG_EVENT("start program");
     try {

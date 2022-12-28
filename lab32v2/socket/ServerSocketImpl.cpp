@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include "ServerSocketImpl.h"
-// TODO mutex error code read
 
 using namespace ProxyServer;
 
@@ -71,7 +70,7 @@ int ServerSocketImpl::acceptNewClientSock() {
         LOG_ERROR_WITH_ERRNO("error accept new client");
         throw ConnectException("error accept new client");
     }
-    LOG_EVENT("accept new client with out problem");
+    LOG_EVENT("accept new client without problem");
     return clientSock;
 }
 
@@ -85,12 +84,10 @@ ServerSocketImpl::~ServerSocketImpl() {
 }
 
 Client *ServerSocketImpl::connectToClient(std::string url, int port) {
-    pthread_mutex_lock(&mutexForServer);
     struct hostent *hostent = gethostbyname(url.data());
     if (hostent == nullptr) {
         LOG_ERROR("gethostbyname");
         herror("gethostbyname");
-        pthread_mutex_unlock(&mutexForServer);
         throw ConnectException("gethostbyname");
     }
     struct sockaddr_in sockAddr;
@@ -101,18 +98,15 @@ Client *ServerSocketImpl::connectToClient(std::string url, int port) {
     int sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock == ERROR_CODE) {
         LOG_ERROR_WITH_ERRNO("setsockopt");
-        pthread_mutex_unlock(&mutexForServer);
         throw ConnectException("setsockport");
     }
     if (connect(sock, (struct sockaddr *) &sockAddr, sizeof(struct sockaddr_in)) == ERROR_CODE) {
         perror("connect: ");
         LOG_ERROR_WITH_ERRNO("connect: ");
-        pthread_mutex_unlock(&mutexForServer);
         throw ConnectException("connect error");
     }
     LOG_EVENT("http server connect");
-    Client *client = new ClientImpl(sock, TypeClient::HTTP_SERVER, NULL);
-    pthread_mutex_unlock(&mutexForServer);
+    Client *client = new ClientImpl(sock, TypeClient::HTTP_SERVER, nullptr);
     return client;
 }
 

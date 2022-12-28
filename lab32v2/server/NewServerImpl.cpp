@@ -5,8 +5,6 @@
 #include "NewServerImpl.h"
 #include <pthread.h>
 
-// TODO not errno
-
 using namespace ProxyServer;
 
 void NewServerImpl::startServer() {
@@ -16,18 +14,16 @@ void NewServerImpl::startServer() {
             int sock = _serverSocket->acceptNewClientSock();
             listFd.push_front(ArgsForThread(sock, _cash));
             pthread_t pthread;
-            errno = pthread_create(&pthread, NULL, &NewServerImpl::startingMethodForThread,
+            int createCode = pthread_create(&pthread, nullptr, &NewServerImpl::startingMethodForThread,
                                    (void *) &(*listFd.begin()));
-            if (errno != SUCCESS) {
-                perror("pthread_create error");
+            if (createCode != SUCCESS) {
+                LOG_ERROR("create error: " + std::string(strerror(createCode)));
                 continue;
-                errno = SUCCESS;
             }
-//            pthread_join(pthread, NULL);
-            errno = pthread_detach(pthread);
-            if (errno != SUCCESS) {
-                perror("pthread_create error");
-                errno = SUCCESS;
+
+            int detachCode = pthread_detach(pthread);
+            if (detachCode != SUCCESS) {
+                LOG_ERROR("detach error: " + std::string(strerror(detachCode)));
                 continue;
             }
         } catch (std::exception *exception) {

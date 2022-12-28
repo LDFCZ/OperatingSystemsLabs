@@ -25,7 +25,6 @@
 #include "../buffer/BufferImpl.h"
 
 namespace ProxyServer {
-    static pthread_mutex_t mutexForServer = PTHREAD_MUTEX_INITIALIZER;
 
     class ServerSocketImpl : public ServerSocket {
     public:

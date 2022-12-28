@@ -4,8 +4,6 @@
 
 #include "HandlerOneClientImpl.h"
 
-// TODO errno fix
-
 using namespace ProxyServer;
 
 void HandlerOneClientImpl::startHandler() {
@@ -176,7 +174,6 @@ bool HandlerOneClientImpl::handlingEvent() {
                 continue;
             }
         }
-
     }
     return false;
 }
@@ -258,7 +255,11 @@ void HandlerOneClientImpl::getFromCash() {
     if (initializeResources(&mutexForCond, &cond) != SUCCESS) {
         return;
     }
-    pthread_mutex_lock(&mutexForCond);
+    int lockCode = pthread_mutex_lock(&mutexForCond);
+    if (lockCode != SUCCESS) {
+        LOG_ERROR("mutex lock error: " + std::string(strerror(lockCode)));
+        return;
+    }
     _client->getBuffer()->getCashElement()->addCondVar(&cond);
     bool run = true;
     while (run) {
@@ -279,47 +280,49 @@ void HandlerOneClientImpl::getFromCash() {
             }
         }
     }
-    pthread_mutex_unlock(&mutexForCond);
+    int unlockCode = pthread_mutex_unlock(&mutexForCond);
+    if (unlockCode != SUCCESS) {
+        LOG_ERROR("mutex unlock error: " + std::string(strerror(unlockCode)));
+        return;
+    }
     _client->getBuffer()->getCashElement()->dellCondVar(&cond);
     deleteResources(&mutexForCond, &cond);
 }
 
 bool HandlerOneClientImpl::initializeResources(pthread_mutex_t *mutex, pthread_cond_t *cond) {
-    errno = pthread_mutex_init(mutex, nullptr);
-    if (errno != SUCCESS) {
-        perror("mutex init");
+    int initCode = pthread_mutex_init(mutex, nullptr);
+    if (initCode != SUCCESS) {
+        LOG_ERROR("mutex init error: " + std::string(strerror(initCode)));
         return FAILURE;
     }
 
-    errno = pthread_cond_init(cond, nullptr);
-    if (errno != SUCCESS) {
-        pthread_mutex_destroy(mutex);
-        perror("cond init");
+    initCode = pthread_cond_init(cond, nullptr);
+    if (initCode != SUCCESS) {
+        LOG_ERROR("cond init error: " + std::string(strerror(initCode)));
         return FAILURE;
     }
     return SUCCESS;
 }
 
 bool HandlerOneClientImpl::deleteResources(pthread_mutex_t *mutex, pthread_cond_t *cond) {
-    errno = pthread_mutex_destroy(mutex);
-    if (errno != SUCCESS) {
-        perror("mutex destroy");
+    int destroyCode = pthread_mutex_destroy(mutex);
+    if (destroyCode != SUCCESS) {
+        LOG_ERROR("mutex destroy error: " + std::string(strerror(destroyCode)));
         return FAILURE;
     }
 
-    errno = pthread_cond_destroy(cond);
-    if (errno != SUCCESS) {
-        pthread_mutex_destroy(mutex);
-        perror("cond destroy");
+    destroyCode = pthread_cond_destroy(cond);
+    if (destroyCode != SUCCESS) {
+        LOG_ERROR("cond destroy error: " + std::string(strerror(destroyCode)));
         return FAILURE;
     }
     return SUCCESS;
 }
 
 bool HandlerOneClientImpl::condWait(pthread_mutex_t *mutex, pthread_cond_t *cond) {
-    errno = pthread_cond_wait(cond, mutex);
-    if (errno != SUCCESS) {
-        perror("wait error");
+    int waitCode = pthread_cond_wait(cond, mutex);
+    if (waitCode != SUCCESS) {
+        LOG_ERROR("cond wait error: " + std::string(strerror(waitCode)));
         return FAILURE;
     }
     return SUCCESS;

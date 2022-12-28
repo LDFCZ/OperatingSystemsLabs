@@ -15,7 +15,7 @@ int ClientImpl::sendBuf(std::string *buf) {
     return code;
 }
 
-int ClientImpl::readBuf(std::string *buf) { // передать пустой буффер размером BUF_SIZE!
+int ClientImpl::readBuf(std::string *buf) {
     char readBuf[BUF_SIZE] = {0};
     int byte = read(_fd, readBuf, BUF_SIZE - 1);
     if (byte < 0) {

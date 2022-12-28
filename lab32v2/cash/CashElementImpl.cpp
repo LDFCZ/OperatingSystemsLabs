@@ -4,8 +4,7 @@
 
 
 #include "CashElementImpl.h"
-
-// TODO mutex error code
+#define SUCCESS 0
 
 using namespace ProxyServer;
 
@@ -22,8 +21,14 @@ std::shared_ptr<std::string> CashElementImpl::getCash() {
 }
 
 CashElementImpl::CashElementImpl(const std::string& heading, long long int dataSize) {
-    pthread_rwlock_init(&_mutexForData, nullptr);
-    pthread_mutex_init(&_mutexForSubscribers, nullptr);
+    int initCode = pthread_rwlock_init(&_mutexForData, nullptr);
+    if (initCode != SUCCESS) {
+        LOG_ERROR("rwlock init error: " + std::string(strerror(initCode)));
+    }
+    initCode = pthread_mutex_init(&_mutexForSubscribers, nullptr);
+    if (initCode != SUCCESS) {
+        LOG_ERROR("mutex init error: " + std::string(strerror(initCode)));
+    }
     _requestHeading = heading;
     std::hash<std::string> hasher;
     _cash->resize(dataSize - heading.size());
@@ -37,13 +42,13 @@ long long int CashElementImpl::getHash() {
 
 CashElementImpl::~CashElementImpl() {
     LOG_EVENT("delete cash ");
-    errno = pthread_rwlock_destroy(&_mutexForData);
-    if (errno != 0) {
-        perror("destroy mutex error");
+    int destroyCode = pthread_rwlock_destroy(&_mutexForData);
+    if (destroyCode != SUCCESS) {
+        LOG_ERROR("rwlock destroy error: " + std::string(strerror(destroyCode)));
     }
-    errno = pthread_mutex_destroy(&_mutexForSubscribers);
-    if (errno != 0) {
-        perror("destroy mutex error");
+    destroyCode = pthread_mutex_destroy(&_mutexForSubscribers);
+    if (destroyCode != SUCCESS) {
+        LOG_ERROR("mutex destroy error: " + std::string(strerror(destroyCode)));
     }
 }
 
@@ -52,15 +57,29 @@ int CashElementImpl::getCountUsers() {
 }
 
 void CashElementImpl::addCountUsers() {
-//    pthread_mutex_lock(&_mutexForData);
+    int lockCode = pthread_mutex_lock(&_mutexForSubscribers);
+    if (lockCode != SUCCESS) {
+        LOG_ERROR("mutex lock error: " + std::string(strerror(lockCode)));
+        return;
+    }
     _countConnectedUsers++;
-//    pthread_mutex_unlock(&_mutexForData);
+    int unlockCode = pthread_mutex_unlock(&_mutexForSubscribers);
+    if (unlockCode != SUCCESS) {
+        LOG_ERROR("mutex unlock error: " + std::string(strerror(unlockCode)));
+    }
 }
 
 void CashElementImpl::minusCountUsers() {
-//    pthread_mutex_lock(&_mutexForData);
+    int lockCode = pthread_mutex_lock(&_mutexForSubscribers);
+    if (lockCode != SUCCESS) {
+        LOG_ERROR("mutex lock error: " + std::string(strerror(lockCode)));
+        return;
+    }
     _countConnectedUsers--;
-//    pthread_mutex_unlock(&_mutexForData);
+    int unlockCode = pthread_mutex_unlock(&_mutexForSubscribers);
+    if (unlockCode != SUCCESS) {
+        LOG_ERROR("mutex unlock error: " + std::string(strerror(unlockCode)));
+    }
 }
 
 bool CashElementImpl::isIsServerConnected() {
@@ -89,39 +108,68 @@ void CashElementImpl::memCopyFromCash(std::string *target, long long int offset,
     pthread_rwlock_rdlock(&_mutexForData);
     memcpy((void *) (target)->c_str(), _cash->c_str() +
                                        offset, sizeCopy);
-//    std::memcpy((void *) (target)->c_str(), _cash->c_str() +
-//                                                  offset, sizeCopy);
-    pthread_rwlock_unlock(&_mutexForData);
+    int unlockCode = pthread_rwlock_unlock(&_mutexForData);
+    if (unlockCode != SUCCESS) {
+        LOG_ERROR("mutex unlock error: " + std::string(strerror(unlockCode)));
+    }
 }
 
 void CashElementImpl::appendStringToCash(std::string *binaryString) {
-    pthread_rwlock_wrlock(&_mutexForData);
+    int lockCode = pthread_rwlock_wrlock(&_mutexForData);
+    if (lockCode != SUCCESS) {
+        LOG_ERROR("mutex lock error: " + std::string(strerror(lockCode)));
+        return;
+    }
     _cash->append(*binaryString);
-    pthread_rwlock_unlock(&_mutexForData);
+    int unlockCode = pthread_rwlock_unlock(&_mutexForData);
+    if (unlockCode != SUCCESS) {
+        LOG_ERROR("mutex unlock error: " + std::string(strerror(unlockCode)));
+    }
     signalUsers();
 }
 
 void CashElementImpl::addCondVar(pthread_cond_t *condVar) {
-    pthread_mutex_lock(&_mutexForSubscribers);
+    int lockCode = pthread_mutex_lock(&_mutexForSubscribers);
+    if (lockCode != SUCCESS) {
+        LOG_ERROR("mutex lock error: " + std::string(strerror(lockCode)));
+        return;
+    }
     _listSubscribers.push_front(condVar);
-    pthread_mutex_unlock(&_mutexForSubscribers);
+    int unlockCode = pthread_mutex_unlock(&_mutexForSubscribers);
+    if (unlockCode != SUCCESS) {
+        LOG_ERROR("mutex unlock error: " + std::string(strerror(unlockCode)));
+    }
 }
 
 void CashElementImpl::dellCondVar(pthread_cond_t *condVar) {
-    pthread_mutex_lock(&_mutexForSubscribers);
+    int lockCode = pthread_mutex_lock(&_mutexForSubscribers);
+    if (lockCode != SUCCESS) {
+        LOG_ERROR("mutex lock error: " + std::string(strerror(lockCode)));
+        return;
+    }
     for (auto it = _listSubscribers.begin(); it != _listSubscribers.end(); it++) {
         if ((*it) == condVar) {
             _listSubscribers.erase(it);
             break;
         }
     }
-    pthread_mutex_unlock(&_mutexForSubscribers);
+    int unlockCode = pthread_mutex_unlock(&_mutexForSubscribers);
+    if (unlockCode != SUCCESS) {
+        LOG_ERROR("mutex unlock error: " + std::string(strerror(unlockCode)));
+    }
 }
 
 void CashElementImpl::signalUsers() {
-    pthread_mutex_lock(&_mutexForSubscribers);
+    int lockCode = pthread_mutex_lock(&_mutexForSubscribers);
+    if (lockCode != SUCCESS) {
+        LOG_ERROR("mutex lock error: " + std::string(strerror(lockCode)));
+        return;
+    }
     for (auto &item: _listSubscribers) {
         pthread_cond_signal(item);
     }
-    pthread_mutex_unlock(&_mutexForSubscribers);
+    int unlockCode = pthread_mutex_unlock(&_mutexForSubscribers);
+    if (unlockCode != SUCCESS) {
+        LOG_ERROR("mutex unlock error: " + std::string(strerror(unlockCode)));
+    }
 }
