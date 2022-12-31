@@ -9,3 +9,5 @@ fit.ippolitov.me/CN_2/2020/list.html
 
 
 kremlin.ru/acts/news
+
+http_proxy=http:/192.168.1.124:7777/ wget http://mirror.ictglobe.com/centos/8-stream/isos/aarch64/CentOS-Stream-8-aarch64-latest-boot.iso
